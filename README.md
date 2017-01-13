@@ -2,6 +2,6 @@
 
 ------------------------------
 
-**Erwan IQUEL**
-**Adrien LEBLANC**
-**Mikaël ROYET**
+* **Erwan IQUEL**
+* **Adrien LEBLANC**
+* **Mikaël ROYET**
