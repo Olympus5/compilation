@@ -3,7 +3,7 @@
 
 
 1. \<suite_fiches\> → (\<fiche\>;)*/
-2. \<fiche\> → \<chauffeur\> (\<volume_citerne\>)? <livraisons>
+2. \<fiche\> → \<chauffeur\> (\<volume_citerne\>)? \<livraisons\>
 3. \<chauffeur\> → ident
 4. \<volume_citerne\> → nbentier
 5. \<livraisons\> → \<livraison\> (, \<livraison\>)*
@@ -12,18 +12,6 @@
 8. \<livraison_magasin\> → \<magasin\> \<quantité\>
 9. \<magasin\> → ident
 10. \<quantité\> → nbentier
-
-##Grammaire algébrique linéaire droite
-
-1. \<suite_fiches\> → \<fiche\>
-2. \<fiche\> → \<chauffeur\>
-3. \<chauffeur\> → ident \<livraison\> | ident \<volume_citerne\>
-4. \<volume_citerne\> → nbentier \<livraison\>
-5. \<livraison\> → \<qualité\>
-6. \<qualité\> → BEAUJEAULAIS \<livraison_magasin\> | BOURGOGNE \<livraison_magasin\> | \<livraison_magasins\>
-7. \<livraison_magasin\> → \<magasin\>
-8. \<magasin\> → ident \<quantité\>
-9. \<quantité\> → nbentier \<livraison_magasin\> | nbentier, \<livraison\> | nbentier;\<suite_fiches\> | nbentier;
 
 ##Expression rationnelle
 
