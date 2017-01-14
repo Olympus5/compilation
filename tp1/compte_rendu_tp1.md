@@ -1,5 +1,10 @@
-#Phase 1
-##Grammaire de départ
+#TP1 compilation
+
+**Author: Erwan IQUEL, Adrien LEBLANC, Mikaël ROYET**
+
+##Phase 1
+
+###Grammaire de départ
 
 
 1. \<suite_fiches\> → (\<fiche\>;)*/
@@ -13,12 +18,10 @@
 9. \<magasin\> → ident
 10. \<quantité\> → nbentier
 
-##Expression rationnelle
+###Expression rationnelle
 
 (ident (nbentier)? (BEAUJOLAIS|BOURGOGNE)? (ident nbentier)+ (,(BEAUJOLAIS|BOURGOGNE)? (ident nbentier)+)*;)*/
 
-##Automate d'analyse syntaxique
+###Automate d'analyse syntaxique
 
 ![Automate d'analyse syntaxique](http://image.noelshack.com/fichiers/2017/02/1484328032-afd-analyse-syntaxique.jpeg)
-
-##Automate d'analyse lexicale
