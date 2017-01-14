@@ -1,6 +1,9 @@
-#TP1 compilation
+#TP1 Compilation
 
-**Author: Erwan IQUEL, Adrien LEBLANC, Mikaël ROYET**
+**Author:**
+* *Erwan IQUEL*
+* *Adrien LEBLANC*
+* *Mikaël ROYET*
 
 ##Phase 1
 
