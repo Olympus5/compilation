@@ -2,7 +2,7 @@ import java.io.*;
 
 /**
  * automate de reconnaissance des fiches de livraison de vin
- * @author ?? MERCI DE PRÉCISER LE NOM DU TRINÖME
+ * @author ?? MERCI DE PRÃ‰CISER LE NOM DU TRINÃ–ME
  *
  */
 public class AutoVin extends Automate{
@@ -10,8 +10,16 @@ public class AutoVin extends Automate{
 	/** table des transitions */
 	private final int[][] transit =
     {   /* Etat        BJ   BG   IDENT  NBENT  ,    ;    /  AUTRES  */
-	 	/* 0 */      {  0,   0,    0,     0,   0,   0,   0,    0   },
-	 	/* 1 */      {  0,   0,    0,     0,   0,   0,   0,    0   },
+	 	/* 0 */      {  8,   8,    1,     8,   8,   8,   8,    8   },
+	 	/* 1 */      {  5,   5,    2,     4,   8,   8,   8,    8   },
+	 	/* 2 */      {  8,   8,    8,     3,   8,   8,   8,    8   },
+	 	/* 3 */      {  8,   8,    8,     8,   6,   7,   8,    8   },
+	 	/* 4 */      {  5,   5,    2,     8,   8,   8,   8,    8   },
+	 	/* 5 */      {  8,   8,    2,     8,   8,   8,   8,    8   },
+	 	/* 6 */      {  5,   5,    2,     8,   8,   8,   8,    8   },
+	 	/* 7 */      {  8,   8,    1,     8,   8,   8,   9,    8   },
+	 	/* 8 */      {  8,   8,    8,     8,   8,   8,   8,    8   },
+	 	/* 9 */      {  8,   8,    8,     8,   8,   8,   8,    8   },
 	 	/* A COMPLETER */      
     } ;
 	
