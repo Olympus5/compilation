@@ -27,7 +27,7 @@
 
 ###Automate d'analyse syntaxique
 
-![Automate d'analyse syntaxique](http://image.noelshack.com/fichiers/2017/02/1484328032-afd-analyse-syntaxique.jpeg)
+![Automate d'analyse syntaxique](http://zupimages.net/up/17/03/cp05.jpeg)
 
 ###Tableau des transitions de l'AFDC de l'analyse syntaxique
 
