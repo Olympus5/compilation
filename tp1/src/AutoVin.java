@@ -34,8 +34,9 @@ public class AutoVin extends Automate{
 		/** on utilise ici un analyseur lexical de type LexVin */
 		lex = new LexVin(flot);
 		this.etatInitial = 0;
-		this.etatFinal = transit.length;
-		this.etatErreur = transit.length - 1;
+		//Erreur car longueur tableau = 10 (nb élément du tab) mais dernier elem = 9 !!! STUPIDE
+		this.etatFinal = transit.length - 1;
+		this.etatErreur = transit.length - 2;
 	}
 
 	/** definition de la methode abstraite getTransition de Automate */
