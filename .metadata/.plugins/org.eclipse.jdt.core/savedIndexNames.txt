@@ -2,7 +2,6 @@ INDEX VERSION 1.127+/home/erwan/Cours/licence/compilation/.metadata/.plugins/org
 2426646370.index
 2307328643.index
 1513993030.index
-4094482740.index
 3900037835.index
 3938652823.index
 3542660237.index

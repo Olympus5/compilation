@@ -18,7 +18,7 @@ public class ActVin extends AutoVin {
 	/* 6 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
 	/* 7 */      { -1,   -1,   4,    -1,   -1,   -1,   5,   -1   },
 	/* 8 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 9 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+	/* 9 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   }
 	/*!!! A COMPLETER !!!*/      
     } ;	       
     
@@ -146,15 +146,18 @@ public class ActVin extends AutoVin {
 			
 			case 4:
 				System.out.println("Abandon de l'analyse si il y a plus de 10 chauffeur (redirection vers l'état final");
+				this.actionQuatre();
 				//Erreur fatal
 			break;
 			
 			case 5:
 				System.out.println("Déterminer le chauffeur ayant livré le plus de magasins");
+				this.actionCinq();
 			break;
 			
 			case 6:
 				System.out.println("A chaque fin de fiche afficher les info présent sur le poly de TP (action 6)");
+				this.actionSix();
 			break;
 		/*!!! A COMPLETER !!!*/
 			default:
@@ -185,5 +188,53 @@ public class ActVin extends AutoVin {
     	return action[etat][unite];
      };
 
-
+     /**
+      * Test la capacité de la citerne d'un camion:
+      * 100, si capacité > 200 ou non indiqué
+      */
+     private void actionUn() {
+ 
+     }
+     
+     private void actionDeux() {
+    	 
+     }
+     
+     /**
+      * Verifie que le volume livrée à un magasin n'est pas supérieur au volume total
+      * de la citerne du camion
+      */
+     private void actionTrois() {
+    	 
+     }
+     
+     /**
+      * Regarde le nombre de chauffeur existant, si == 10 alors fin de l'analyse et redirection
+      * vers l'état final
+      */
+     private void actionQuatre() {
+    	 if(this.tabChauf.length > 10) {
+    		 this.etatInitial = this.etatFinal;
+    		 erreur(ActVin.FATALE, "Il y a déjà 10 chauffeurs en action");
+    	 }
+     }
+     
+     /**
+      * Indique le chauffeur ayant livrée le plus de magasins
+      */
+     private void actionCinq() {
+    	 int numChauffeur = 0;
+    	 
+    	 for(int i = 1, c = this.tabChauf.length ; i < c;i++) {
+    		if(this.tabChauf[i].magdif.size() > this.tabChauf[i].magdif.size()) {
+    			numChauffeur = i;
+    		}
+    	 }
+    	 
+    	 System.out.println("Le chauffeur n°"+numChauffeur+" est celui qui a livré le plus.");
+     }
+     
+     private void actionSix() {
+    	 
+     }
 } // class Actvin
