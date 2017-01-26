@@ -1,33 +1,33 @@
 import java.io.InputStream;
 
 /**
-* gestion des actions associees a la reconnaissance des fiches de livraison de vin
-* @author Erwan IQUEL, Adrien LEBLANC, Mikael ROYET
-*/
+ * gestion des actions associees a la reconnaissance des fiches de livraison de vin
+ * @author Erwan IQUEL, Adrien LEBLANC, Mikael ROYET
+ */
 public class ActVin extends AutoVin {
 
-    /** table des actions */
-    private final int[][] action =
-    {/* �tat        BJ    BG   IDENT  NBENT   ,     ;     /  AUTRES  */
-	/* 0 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 1 */      { 1,   1,   1,    1,   -1,   -1,   -1,   -1   },
-	/* 2 */      { -1,   -1,   -1,    2,   -1,   -1,   -1,   -1   },
-	/* 3 */      { -1,   -1,   -1,    -1,   3,   6,   -1,   -1   },
-	/* 4 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 5 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 6 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 7 */      { -1,   -1,   4,    -1,   -1,   -1,   5,   -1   },
-	/* 8 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
-	/* 9 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   }
-	/*!!! A COMPLETER !!!*/      
-    } ;	       
-    
-    /** constructeur classe ActVin */
-    public ActVin(InputStream flot) {
-    	super(flot);
-    }
+	/** table des actions */
+	private final int[][] action =
+		{/* état        BJ    BG   IDENT  NBENT   ,     ;     /  AUTRES  */
+			/* 0 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+			/* 1 */      { 1,   1,   1,    1,   -1,   -1,   -1,   -1   },
+			/* 2 */      { -1,   -1,   -1,    2,   -1,   -1,   -1,   -1   },
+			/* 3 */      { -1,   -1,   -1,    -1,   3,   6,   -1,   -1   },
+			/* 4 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+			/* 5 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+			/* 6 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+			/* 7 */      { -1,   -1,   4,    -1,   -1,   -1,   5,   -1   },
+			/* 8 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   },
+			/* 9 */      { -1,   -1,   -1,    -1,   -1,   -1,   -1,   -1   }
+			/*!!! A COMPLETER !!!*/      
+		} ;	       
 
-    /** types d'erreurs detectees */
+	/** constructeur classe ActVin */
+	public ActVin(InputStream flot) {
+		super(flot);
+	}
+
+	/** types d'erreurs detectees */
 	private static final int FATALE = 0, NONFATALE = 1;
 
 	/** taille d'une colonne pour affichage ecran */
@@ -36,17 +36,27 @@ public class ActVin extends AutoVin {
 	private static final int MAXCHAUF = 10;
 	/** tableau des chauffeurs et resume des livraison de chacun */
 	private Chauffeur[] tabChauf = new Chauffeur[MAXCHAUF];
-	
+
 	/** indice courant du nombre de chauffeurs dans le tableaau tabChauf */
-	private int ichauf ;
-	/*!!! DELARATIONS A COMPLETER !!!*/
+	private int ichauf;
+
+	//Attributs chauffeur
+	private int typeVin = -1;
+	private int numChauff;
+	private int capaciteCiterne = 0;
+	private int quantiteBJ = 0;
+	private int quantiteBG = 0;
+	private int quantiteORD = 0;
+	private SmallSet magasins = new SmallSet();
+	private int vinLivre = 0;
+	/*!!! DECLARATIONS A COMPLETER !!!*/
 
 	/** utilitaire d'affichage � l'ecran 
 	 * @param ch est une chaine de longueur quelconque
 	 * @return chaine ch cadree a gauche sur MAXLGID caracteres
 	 * */
 	private String chaineCadrageGauche(String ch) {
-	
+
 		int lgch = Math.min(MAXLGID, ch.length());
 		String chres = ch.substring(0, lgch);
 		for (int k = lgch; k < MAXLGID; k++)
@@ -58,11 +68,11 @@ public class ActVin extends AutoVin {
 	private void afficherchauf() {
 		String idchaufcour, ch;
 		Ecriture.ecrireStringln("");
-		ch = "CHAUFFEUR                   BJ        BG       ORD     NBMAG\n"
+		ch = "CHAUFFEUR                 BJ        BG       ORD     NBMAG\n"
 				+ "---------                   --        --       ---     -----";
 		Ecriture.ecrireStringln(ch);
 		for (int i = 0; i <= ichauf; i++) {
-//			System.out.println(" numchauf courant "+tabChauf[i].numchauf);
+			//			System.out.println(" numchauf courant "+tabChauf[i].numchauf);
 			idchaufcour = ((LexVin)lex).repId(tabChauf[i].numchauf);
 			Ecriture.ecrireString(chaineCadrageGauche(idchaufcour));
 			Ecriture.ecrireInt(tabChauf[i].bj, 10);
@@ -72,7 +82,7 @@ public class ActVin extends AutoVin {
 			Ecriture.ecrireStringln("");
 		}
 	} 
-	
+
 	/** gestion des erreurs 
 	 * @param te type de l'erreur
 	 * @param messErr message associe a l'erreur
@@ -95,10 +105,10 @@ public class ActVin extends AutoVin {
 	 * initialisations a effectuer avant les actions
 	 */
 	private void initialisations() {
-		ichauf = -1;
+		ichauf = 0;
 		/*!!! A COMPLETER SI BESOIN !!!*/
 	} 
-	
+
 	/**
 	 * acces a un attribut lexical 
 	 * cast pour preciser que lex est de type LexVin
@@ -123,118 +133,178 @@ public class ActVin extends AutoVin {
 	public void executer(int numact) {
 
 		switch (numact) {
-			case -1:	// action vide
+		case -1:	// action vide
 			break;
-			
-			case 0:
-				this.initAction();
+
+		case 0:
+			this.initAction();
 			break;
-			
-			case 1:
-				System.out.println("Forcer à 100 la cap");
+
+		case 1:
+			this.actionUn();
 			break;
-			
-			case 2:
-				System.out.println("Contrôler le volume livré");
-				//Erreur non fatal
+
+		case 2:
+			this.actionDeux();
+			//Erreur non fatal
 			break;
-			
-			case 3:
-				System.out.println("Vérifier que le volume livré ne dépasse pas la capacité de la citerne");
-				//Erreur non fatal
+
+		case 3:
+			this.actionTrois();
+			//Erreur non fatal
 			break;
-			
-			case 4:
-				System.out.println("Abandon de l'analyse si il y a plus de 10 chauffeur (redirection vers l'état final");
-				this.actionQuatre();
-				//Erreur fatal
+
+		case 4:
+			this.actionQuatre();
+			//Erreur fatal
 			break;
-			
-			case 5:
-				System.out.println("Déterminer le chauffeur ayant livré le plus de magasins");
-				this.actionCinq();
+
+		case 5:
+			this.actionCinq();
 			break;
-			
-			case 6:
-				System.out.println("A chaque fin de fiche afficher les info présent sur le poly de TP (action 6)");
-				this.actionSix();
+
+		case 6:
+			this.actionSix();
 			break;
-		/*!!! A COMPLETER !!!*/
-			default:
-				Lecture.attenteSurLecture("action " + numact + " non prevue");
+			/*!!! A COMPLETER !!!*/
+		default:
+			Lecture.attenteSurLecture("action " + numact + " non prevue");
 		}
 	}
-	
+
 	/**
 	 * definition methode abstraite faireAction de Automate
 	 */
-	 public void faireAction(int etat, int unite) {
-    	 executer(action[etat][unite]);
-     };
-     
-     /**
-      * definition methode abstraite initAction de Automate
-      */
-     public void initAction() {
-    	// action 0 � effectuer a l'init
-    	 initialisations();
-     };
+	public void faireAction(int etat, int unite) {
+		switch(lex.lireSymb()) {
+			case 0:
+				this.typeVin = 0;
+			break;
 
-     /**
-      * definition methode abstraite getAction de Automate
-      */
-     public int getAction(int etat, int unite) {
-    	//return -1;
-    	return action[etat][unite];
-     };
+			case 1:
+				this.typeVin = 1;
+			break;
+			
+			case 2:
+				if(etat == 1) {
+					this.numChauff = numId();
+				} else {
+					this.magasins.add(numId());
+				}
+			break;
+			
+			case 3:
+				if(etat == 4) {
+					this.capaciteCiterne = this.valNb();
+				} else {
+					if(typeVin == 0) this.quantiteBJ = this.valNb();
+					else if(typeVin == 1) this.quantiteBG = this.valNb();
+					else if(typeVin == -1) this.quantiteORD = this.valNb();
+					
+					this.vinLivre += this.valNb();
+				}
+			break;
+			
+			case 4: //On fait rien car virgule
+			break;
+			
+			case 5://On fait rien car fin de l'analyse
+			break;
+			
+			case 6:
+				/*for(int i = 0; i < this.ichauf; i++) {
+					this.tabChauf[i] = null;
+				}*/
+				
+				this.ichauf = 0;
+				
+				this.magasins = new SmallSet();
+				this.typeVin = -1;
+				this.capaciteCiterne = 0;
+				this.quantiteBG = 0;
+				this.quantiteBJ = 0;
+				this.quantiteORD = 0;
+				this.vinLivre = 0;
+			break;
+			
+			default:
+		}
+		
+		executer(action[etat][unite]);
+	};
 
-     /**
-      * Test la capacité de la citerne d'un camion:
-      * 100, si capacité > 200 ou non indiqué
-      */
-     private void actionUn() {
- 
-     }
-     
-     private void actionDeux() {
-    	 
-     }
-     
-     /**
-      * Verifie que le volume livrée à un magasin n'est pas supérieur au volume total
-      * de la citerne du camion
-      */
-     private void actionTrois() {
-    	 
-     }
-     
-     /**
-      * Regarde le nombre de chauffeur existant, si == 10 alors fin de l'analyse et redirection
-      * vers l'état final
-      */
-     private void actionQuatre() {
-    	 if(this.tabChauf.length > 10) {
-    		 this.etatInitial = this.etatFinal;
-    		 erreur(ActVin.FATALE, "Il y a déjà 10 chauffeurs en action");
-    	 }
-     }
-     
-     /**
-      * Indique le chauffeur ayant livrée le plus de magasins
-      */
-     private void actionCinq() {
-    	 int numChauffeur = 0;
-    	 
-    	 for(int i = 1, c = this.tabChauf.length ; i < c;i++) {
-    		if(this.tabChauf[i].magdif.size() > this.tabChauf[i].magdif.size()) {
-    			numChauffeur = i;
-    		}
-    	 }
-    	 
-    	 System.out.println("Le chauffeur n°"+numChauffeur+" est celui qui a livré le plus.");
-     }
-     
-     private void actionSix() {
-    	 
-     }
+	/**
+	 * definition methode abstraite initAction de Automate
+	 */
+	public void initAction() {
+		// action 0 � effectuer a l'init
+		initialisations();
+	};
+
+	/**
+	 * definition methode abstraite getAction de Automate
+	 */
+	public int getAction(int etat, int unite) {
+		//return -1;
+		return action[etat][unite];
+	};
+
+	/**
+	 * Test la capacité de la citerne d'un camion:
+	 * 100, si capacité > 200 ou non indiqué
+	 */
+	private void actionUn() {
+		if(this.capaciteCiterne < 100 || this.capaciteCiterne > 200) {
+			this.capaciteCiterne = 100;
+		}
+	}
+
+	private void actionDeux() {
+		if(this.vinLivre > 0) {
+			erreur(ActVin.NONFATALE, "La quantité de vin livré doit etre supérieur à 0L");
+		}
+	}
+
+	/**
+	 * Verifie que le volume livrée à un magasin n'est pas supérieur au volume total
+	 * de la citerne du camion
+	 */
+	private void actionTrois() {
+		if(this.vinLivre > this.capaciteCiterne) {
+			erreur(ActVin.NONFATALE, "On peut pas livré plus de vin qu'il y en a dans la citerne");
+		}
+	}
+
+	/**
+	 * Regarde le nombre de chauffeur existant, si == 10 alors fin de l'analyse et redirection
+	 * vers l'état final
+	 */
+	private void actionQuatre() {
+		if(this.ichauf >= 10) {
+			this.etatInitial = this.etatFinal;
+			erreur(ActVin.FATALE, "Il y a déjà 10 chauffeurs en action");
+		} else {
+			ichauf++;
+		}
+	}
+
+	/**
+	 * Indique le chauffeur ayant livrée le plus de magasins
+	 */
+	private void actionCinq() {
+		int numChauffeur = 0;
+
+		for(int i = 1; i < this.ichauf;i++) {
+			if(this.tabChauf[i].magdif.size() > this.tabChauf[numChauffeur].magdif.size()) {
+				numChauffeur = i;
+			}
+		}
+
+		System.out.println("Le chauffeur n°"+numChauffeur+1+" est celui qui a livré le plus.");
+	}
+
+	private void actionSix() {
+		this.tabChauf[ichauf] = new Chauffeur(this.numChauff, this.quantiteBJ, this.quantiteBG, this.quantiteORD, this.magasins);
+		this.afficherchauf();
+	}
 } // class Actvin
