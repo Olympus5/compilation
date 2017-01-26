@@ -42,7 +42,7 @@ public class ActVin extends AutoVin {
 
 	//Attributs chauffeur
 	private int typeVin = -1;
-	private int numChauff;
+	private int numChauff = 0;
 	private int capaciteCiterne = 0;
 	private int quantiteBJ = 0;
 	private int quantiteBG = 0;
@@ -176,7 +176,7 @@ public class ActVin extends AutoVin {
 	 * definition methode abstraite faireAction de Automate
 	 */
 	public void faireAction(int etat, int unite) {
-		switch(lex.lireSymb()) {
+		switch(unite) {
 			case 0:
 				this.typeVin = 0;
 			break;
@@ -186,7 +186,17 @@ public class ActVin extends AutoVin {
 			break;
 			
 			case 2:
-				if(etat == 1) {
+				
+				if(etat == 0 || etat == 7) {
+					this.magasins = new SmallSet();
+					this.capaciteCiterne = 0;
+					this.quantiteBG = 0;
+					this.quantiteBJ = 0;
+					this.quantiteORD = 0;
+					this.vinLivre = 0;
+					this.typeVin = -1;
+					this.numChauff = 0;
+					
 					this.numChauff = numId();
 				} else {
 					this.magasins.add(numId());
@@ -194,7 +204,7 @@ public class ActVin extends AutoVin {
 			break;
 			
 			case 3:
-				if(etat == 4) {
+				if(etat == 1) {
 					this.capaciteCiterne = this.valNb();
 				} else {
 					if(typeVin == 0) this.quantiteBJ = this.valNb();
@@ -206,25 +216,14 @@ public class ActVin extends AutoVin {
 			break;
 			
 			case 4: //On fait rien car virgule
-			break;
-			
-			case 5://On fait rien car fin de l'analyse
-			break;
-			
-			case 6:
-				/*for(int i = 0; i < this.ichauf; i++) {
-					this.tabChauf[i] = null;
-				}*/
-				
-				this.ichauf = 0;
-				
-				this.magasins = new SmallSet();
-				this.typeVin = -1;
-				this.capaciteCiterne = 0;
-				this.quantiteBG = 0;
-				this.quantiteBJ = 0;
-				this.quantiteORD = 0;
 				this.vinLivre = 0;
+				this.typeVin = -1;
+			break;
+			
+			case 5://On fait rien car fin d'une fiche
+			break;
+			
+			case 6://On fait rien car fin de l'analyse
 			break;
 			
 			default:
@@ -260,7 +259,7 @@ public class ActVin extends AutoVin {
 	}
 
 	private void actionDeux() {
-		if(this.vinLivre > 0) {
+		if(this.vinLivre <= 0) {
 			erreur(ActVin.NONFATALE, "La quantité de vin livré doit etre supérieur à 0L");
 		}
 	}
@@ -300,7 +299,7 @@ public class ActVin extends AutoVin {
 			}
 		}
 
-		System.out.println("Le chauffeur n°"+numChauffeur+1+" est celui qui a livré le plus.");
+		System.out.println("Le chauffeur "+lex.repId(tabChauf[numChauffeur].numchauf)+" est celui qui a livré le plus.");
 	}
 
 	private void actionSix() {
