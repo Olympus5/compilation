@@ -141,30 +141,53 @@ public class ActVin extends AutoVin {
 			break;
 
 		case 1:
-			this.actionUn();
+			if(this.capaciteCiterne < 100 || this.capaciteCiterne > 200) {
+				this.capaciteCiterne = 100;
+			}
+			
 			break;
 
 		case 2:
-			this.actionDeux();
-			//Erreur non fatal
+			if(this.vinLivre <= 0) {
+				erreur(ActVin.NONFATALE, "La quantité de vin livré doit etre supérieur à 0L");
+			}
+			
 			break;
 
 		case 3:
-			this.actionTrois();
-			//Erreur non fatal
+			if(this.vinLivre > this.capaciteCiterne) {
+				erreur(ActVin.NONFATALE, "On peut pas livré plus de vin qu'il y en a dans la citerne");
+			}
+			
 			break;
 
 		case 4:
-			this.actionQuatre();
-			//Erreur fatal
+			if(this.ichauf >= 10) {
+				this.etatInitial = this.etatFinal;
+				erreur(ActVin.FATALE, "Il y a déjà 10 chauffeurs en action");
+			} else {
+				ichauf++;
+			}
+			
 			break;
 
 		case 5:
-			this.actionCinq();
+			int numChauffeur = 0;
+
+			for(int i = 1; i < this.ichauf;i++) {
+				if(this.tabChauf[i].magdif.size() > this.tabChauf[numChauffeur].magdif.size()) {
+					numChauffeur = i;
+				}
+			}
+
+			System.out.println("Le chauffeur "+lex.repId(tabChauf[numChauffeur].numchauf)+" est celui qui a livré le plus.");
+			
 			break;
 
 		case 6:
-			this.actionSix();
+			this.tabChauf[ichauf] = new Chauffeur(this.numChauff, this.quantiteBJ, this.quantiteBG, this.quantiteORD, this.magasins);
+			this.afficherchauf();
+			
 			break;
 			/*!!! A COMPLETER !!!*/
 		default:
@@ -176,6 +199,8 @@ public class ActVin extends AutoVin {
 	 * definition methode abstraite faireAction de Automate
 	 */
 	public void faireAction(int etat, int unite) {
+		LexVin lex = (LexVin) this.lex;
+		
 		switch(unite) {
 			case 0:
 				this.typeVin = 0;
@@ -248,62 +273,4 @@ public class ActVin extends AutoVin {
 		return action[etat][unite];
 	};
 
-	/**
-	 * Test la capacité de la citerne d'un camion:
-	 * 100, si capacité > 200 ou non indiqué
-	 */
-	private void actionUn() {
-		if(this.capaciteCiterne < 100 || this.capaciteCiterne > 200) {
-			this.capaciteCiterne = 100;
-		}
-	}
-
-	private void actionDeux() {
-		if(this.vinLivre <= 0) {
-			erreur(ActVin.NONFATALE, "La quantité de vin livré doit etre supérieur à 0L");
-		}
-	}
-
-	/**
-	 * Verifie que le volume livrée à un magasin n'est pas supérieur au volume total
-	 * de la citerne du camion
-	 */
-	private void actionTrois() {
-		if(this.vinLivre > this.capaciteCiterne) {
-			erreur(ActVin.NONFATALE, "On peut pas livré plus de vin qu'il y en a dans la citerne");
-		}
-	}
-
-	/**
-	 * Regarde le nombre de chauffeur existant, si == 10 alors fin de l'analyse et redirection
-	 * vers l'état final
-	 */
-	private void actionQuatre() {
-		if(this.ichauf >= 10) {
-			this.etatInitial = this.etatFinal;
-			erreur(ActVin.FATALE, "Il y a déjà 10 chauffeurs en action");
-		} else {
-			ichauf++;
-		}
-	}
-
-	/**
-	 * Indique le chauffeur ayant livrée le plus de magasins
-	 */
-	private void actionCinq() {
-		int numChauffeur = 0;
-
-		for(int i = 1; i < this.ichauf;i++) {
-			if(this.tabChauf[i].magdif.size() > this.tabChauf[numChauffeur].magdif.size()) {
-				numChauffeur = i;
-			}
-		}
-
-		System.out.println("Le chauffeur "+lex.repId(tabChauf[numChauffeur].numchauf)+" est celui qui a livré le plus.");
-	}
-
-	private void actionSix() {
-		this.tabChauf[ichauf] = new Chauffeur(this.numChauff, this.quantiteBJ, this.quantiteBG, this.quantiteORD, this.magasins);
-		this.afficherchauf();
-	}
 } // class Actvin
