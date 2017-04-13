@@ -5,33 +5,33 @@ import java.util.ArrayList;
 
 /**
  * Analyseur lexical pour TP livraison vins
- * @author ?? MERCI DE PRÉCISER LE NOM DU TRINÔME
+ * @author Erwan IQUEL, Adrien LEBLANC, Mikael ROYET
  *
  */
 public class LexVin extends Lex {
 
 	/** codage des items lexicaux */
-	protected final int 
-			BEAUJOLAIS = 0, BOURGOGNE = 1, IDENT = 2, NBENTIER = 3, 
+	protected final int
+			BEAUJOLAIS = 0, BOURGOGNE = 1, IDENT = 2, NBENTIER = 3,
 			VIRGULE = 4, PTVIRG = 5, BARRE = 6, AUTRES = 7;
 	public static final String[] images = { "BEAUJ", "BOURG", "IDENT", "NBENT", "  ,  ",
 			"  ;  ", "  /  ", "AUTRE" };
- 
-	/** nombre de mots réservés dans Lex.tabId */
-    private final int NBRES = 2 ; 
+
+	/** nombre de mots rï¿½servï¿½s dans Lex.tabId */
+    private final int NBRES = 2 ;
     /** indice de remplissage de Lex.tabid */
-    private int itab ; 
+    private int itab ;
 
     /** attributs lexicaux */
     private int valNb, numId ;
-    
+
     /** caractere courant */
-    private char carlu ; 
-    
+    private char carlu ;
+
     public char getCarlu(){
-		return this.carlu;
+			return this.carlu;
     }
-    
+
     /** constructeur classe LexVin */
     public LexVin(InputStream flot) {
 	 	/** initialisation du flot par la classe abstraite */
@@ -56,27 +56,27 @@ public class LexVin extends Lex {
 	}
 
 	/** determination de l'item lexical
-	 * definition de la methode abstraite lireSymb de Lex  
-	 * 
+	 * definition de la methode abstraite lireSymb de Lex
+	 *
 	 * @return code entier de l'item lexical reconnu
 	 * */
 	public int lireSymb() {
-		
+
 		return AUTRES; // A COMPLETER
-		
+
 	} /** liresymb */
 
 	/** fonction donnant la chaine associee a un ident de tabId
-	 * definition de la methode abstraite repId de Lex 
-	 * 
+	 * definition de la methode abstraite repId de Lex
+	 *
 	 * @param nId indice de l'ident dans tabId
-	 * @return chaine associee a l'ident 
+	 * @return chaine associee a l'ident
 	 * */
 	public String repId(int nId) {
-		
+
 		return ""; // A COMPLETER
-		
-	} 
+
+	}
 
 	/** methodes d'acces aux attributs lexicaux */
 	public int getValNb() {

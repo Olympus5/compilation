@@ -186,6 +186,7 @@ public class ActVin extends AutoVin {
 
 		case 6:
 			this.tabChauf[ichauf] = new Chauffeur(this.numChauff, this.quantiteBJ, this.quantiteBG, this.quantiteORD, this.magasins);
+			System.out.println("\nFiche n°"+(this.ichauf+1)+":");
 			this.afficherchauf();
 			
 			break;
@@ -199,18 +200,16 @@ public class ActVin extends AutoVin {
 	 * definition methode abstraite faireAction de Automate
 	 */
 	public void faireAction(int etat, int unite) {
-		LexVin lex = (LexVin) this.lex;
-		
 		switch(unite) {
-			case 0:
+			case 0://BEAUJOLAIS
 				this.typeVin = 0;
 			break;
 
-			case 1:
+			case 1://BOURGOGNE
 				this.typeVin = 1;
 			break;
 			
-			case 2:
+			case 2://IDENT
 				
 				if(etat == 0 || etat == 7) {
 					this.magasins = new SmallSet();
@@ -228,7 +227,7 @@ public class ActVin extends AutoVin {
 				}
 			break;
 			
-			case 3:
+			case 3://NBENTIER
 				if(etat == 1) {
 					this.capaciteCiterne = this.valNb();
 				} else {
@@ -240,18 +239,18 @@ public class ActVin extends AutoVin {
 				}
 			break;
 			
-			case 4: //On fait rien car virgule
+			case 4: //VIRGULE
 				this.vinLivre = 0;
 				this.typeVin = -1;
 			break;
 			
-			case 5://On fait rien car fin d'une fiche
+			case 5://POINT VIRGULE
 			break;
 			
-			case 6://On fait rien car fin de l'analyse
+			case 6://BARRE
 			break;
 			
-			default:
+			default://AUTRES
 		}
 		
 		executer(action[etat][unite]);
