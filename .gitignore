@@ -2,3 +2,5 @@
 tp1/.*
 !.gitignore
 !tp1/.gitignore
+projet/compilation/antlr/
+.metadata/

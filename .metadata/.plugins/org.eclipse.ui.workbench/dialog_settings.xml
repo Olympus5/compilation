@@ -4,11 +4,11 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/home/erwan/Cours/licence/compilation/projet"/>
 			<item value="/home/erwan/Cours/licence/compilation/res/tp1/exempleAutomate-expTD"/>
 			<item value="/home/erwan/Cours/licence/compilation/res/tp1/phase-1-2"/>
 			<item value="/home/erwan/Cours/licence/compilation"/>
 			<item value="/home/erwan/Cours/licence/compilation/res/tp1"/>
-			<item value="/home/erwan/Cours/licence/compilation/res"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
