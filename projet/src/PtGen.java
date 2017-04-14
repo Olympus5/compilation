@@ -1,9 +1,9 @@
 /*********************************************************************************
  * VARIABLES ET METHODES FOURNIES PAR LA CLASSE UtilLex (cf libclass)            *
- *       complément à l'ANALYSEUR LEXICAL produit par ANTLR                      *
+ *       complï¿½ment ï¿½ l'ANALYSEUR LEXICAL produit par ANTLR                      *
  *                                                                               *
  *                                                                               *
- *   nom du programme compilé, sans suffixe : String UtilLex.nomSource           *
+ *   nom du programme compilï¿½, sans suffixe : String UtilLex.nomSource           *
  *   ------------------------                                                    *
  *                                                                               *
  *   attributs lexicaux (selon items figurant dans la grammaire):                *
@@ -12,10 +12,10 @@
  *     int UtilLex.numId = code du dernier identificateur lu (item ident)        *
  *                                                                               *
  *                                                                               *
- *   méthodes utiles :                                                           *
+ *   mï¿½thodes utiles :                                                           *
  *   ---------------                                                             *
- *     void UtilLex.messErr(String m)  affichage de m et arrêt compilation       *
- *     String UtilLex.repId(int nId) délivre l'ident de codage nId               *
+ *     void UtilLex.messErr(String m)  affichage de m et arrï¿½t compilation       *
+ *     String UtilLex.repId(int nId) dï¿½livre l'ident de codage nId               *
  *     void afftabSymb()  affiche la table des symboles                          *
  *********************************************************************************/
 
@@ -24,12 +24,12 @@ import java.io.*;
 
 // classe de mise en oeuvre du compilateur
 // =======================================
-// (vérifications sémantiques + production du code objet)
+// (vï¿½rifications sï¿½mantiques + production du code objet)
 
 public class PtGen {
     
 
-    // constantes manipulées par le compilateur
+    // constantes manipulï¿½es par le compilateur
     // ----------------------------------------
 
 	private static final int 
@@ -50,7 +50,7 @@ public class PtGen {
     // types permis :
 	ENT=1,BOOL=2,NEUTRE=3,
 
-	// catégories possibles des identificateurs :
+	// catï¿½gories possibles des identificateurs :
 	CONSTANTE=1,VARGLOBALE=2,VARLOCALE=3,PARAMFIXE=4,PARAMMOD=5,PROC=6,
 	DEF=7,REF=8,PRIVEE=9,
 
@@ -58,26 +58,26 @@ public class PtGen {
     TRANSDON=1,TRANSCODE=2,REFEXT=3;
 
 
-    // utilitaires de contrôle de type
+    // utilitaires de contrï¿½le de type
     // -------------------------------
     
 	private static void verifEnt() {
 		if (tCour != ENT)
-			UtilLex.messErr("expression entière attendue");
+			UtilLex.messErr("expression entiï¿½re attendue");
 	}
 
 	private static void verifBool() {
 		if (tCour != BOOL)
-			UtilLex.messErr("expression booléenne attendue");
+			UtilLex.messErr("expression boolï¿½enne attendue");
 	}
 
-    // pile pour gérer les chaînes de reprise et les branchements en avant
+    // pile pour gï¿½rer les chaï¿½nes de reprise et les branchements en avant
     // -------------------------------------------------------------------
 
     private static TPileRep pileRep;  
 
 
-    // production du code objet en mémoire
+    // production du code objet en mï¿½moire
     // -----------------------------------
 
     private static ProgObjet po;
@@ -86,9 +86,9 @@ public class PtGen {
     // COMPILATION SEPAREE 
     // -------------------
     //
-    // modification du vecteur de translation associé au code produit 
-    // + incrémentation attribut nbTransExt du descripteur
-    // NB: effectué uniquement si c'est une référence externe ou si on compile un module
+    // modification du vecteur de translation associï¿½ au code produit 
+    // + incrï¿½mentation attribut nbTransExt du descripteur
+    // NB: effectuï¿½ uniquement si c'est une rï¿½fï¿½rence externe ou si on compile un module
     private static void modifVecteurTrans(int valeur) {
 		if (valeur == REFEXT || desc.getUnite().equals("module")) {
 			po.vecteurTrans(valeur);
@@ -96,19 +96,19 @@ public class PtGen {
 		}
 	}
     
-    // descripteur associé à un programme objet
+    // descripteur associï¿½ ï¿½ un programme objet
     private static Descripteur desc;
 
      
     // autres variables fournies
     // -------------------------
-    public static String trinome="XxxYyyZzz"; // MERCI de renseigner ici un nom pour le trinome, constitué de exclusivement de lettres
+    public static String trinome="Erwan IQUEL"; // MERCI de renseigner ici un nom pour le trinome, constituï¿½ de exclusivement de lettres
     
-    private static int tCour; // type de l'expression compilée
-    private static int vCour; // valeur de l'expression compilée le cas echeant
+    private static int tCour; // type de l'expression compilï¿½e
+    private static int vCour; // valeur de l'expression compilï¿½e le cas echeant
   
    
-    // Définition de la table des symboles
+    // Dï¿½finition de la table des symboles
     //
     private static EltTabSymb[] tabSymb = new EltTabSymb[MAXSYMB + 1];
     
@@ -116,8 +116,11 @@ public class PtGen {
     // bc = bloc courant (=1 si le bloc courant est le programme principal)
 	private static int it, bc;
 	
+	//Variable complÃ©mentaire
+	private static int nombreDeVariableGlobale;
+	
 	// utilitaire de recherche de l'ident courant (ayant pour code UtilLex.numId) dans tabSymb
-	// rend en résultat l'indice de cet ident dans tabSymb (O si absence)
+	// rend en rï¿½sultat l'indice de cet ident dans tabSymb (O si absence)
 	private static int presentIdent(int binf) {
 		int i = it;
 		while (i >= binf && tabSymb[i].code != UtilLex.numId)
@@ -128,11 +131,11 @@ public class PtGen {
 			return 0;
 	}
 
-	// utilitaire de placement des caractéristiques d'un nouvel ident dans tabSymb
+	// utilitaire de placement des caractï¿½ristiques d'un nouvel ident dans tabSymb
 	//
 	private static void placeIdent(int c, int cat, int t, int v) {
 		if (it == MAXSYMB)
-			UtilLex.messErr("débordement de la table des symboles");
+			UtilLex.messErr("dï¿½bordement de la table des symboles");
 		it = it + 1;
 		tabSymb[it] = new EltTabSymb(c, cat, t, v);
 	}
@@ -152,7 +155,7 @@ public class PtGen {
 			} else
 				Ecriture.ecrireInt(i, 6);
 			if (tabSymb[i] == null)
-				System.out.println(" référence NULL");
+				System.out.println(" rï¿½fï¿½rence NULL");
 			else
 				System.out.println(" " + tabSymb[i]);
 		}
@@ -171,33 +174,101 @@ public class PtGen {
 		
 		// pile des reprises pour compilation des branchements en avant
 		pileRep = new TPileRep(); 
-		// programme objet = code Mapile de l'unité en cours de compilation
+		// programme objet = code Mapile de l'unitï¿½ en cours de compilation
 		po = new ProgObjet();
-		// COMPILATION SEPAREE: desripteur de l'unité en cours de compilation
+		// COMPILATION SEPAREE: desripteur de l'unitï¿½ en cours de compilation
 		desc = new Descripteur();
 		
-		// initialisation nécessaire aux attributs lexicaux (quand enchainement de compilations)
+		// initialisation nï¿½cessaire aux attributs lexicaux (quand enchainement de compilations)
 		//UtilLex.initialisation();
 	
 		// initialisation du type de l'expression courante
 		tCour = NEUTRE;
-
+		
+		//Initialisation des variable personnels
+		nombreDeVariableGlobale = 0;
 	} // initialisations
 
-	// code des points de génération A COMPLETER
+	// code des points de gï¿½nï¿½ration A COMPLETER
 	// -----------------------------------------
 	public static void pt(int numGen) {
 	
 		switch (numGen) {
-		case 0:
-			initialisations();
+			case 0:
+				initialisations();
 			break;
-
-		// A COMPLETER
-		
-		default:
-			System.out
-					.println("Point de génération non prévu dans votre liste");
+	
+			// A COMPLETER
+			
+			
+			/*
+			 * Declaration et Affectation -> 1-20
+			 * Lecture et Ecriture -> 21-41
+			 */
+			
+			
+			
+			/*
+			 * Declarations des variables, constantes, ... / Affectations de valeur
+			 */
+			case 1://Compteurs de variables et ajout de variables dans la table des symboles
+				int adresseVariableGlobale = presentIdent(1);
+				
+				if(adresseVariableGlobale == 0) {
+					placeIdent(UtilLex.numId, VARGLOBALE, tCour, nombreDeVariableGlobale);
+					nombreDeVariableGlobale++;
+				} else {
+					UtilLex.messErr("Variable dÃ©jÃ  dÃ©clarÃ©e");
+				}
+			break;
+			
+			case 2://Declaration de l'instructon pour rÃ©server de la place en pile pour les vars
+				if(nombreDeVariableGlobale > 0) {
+					po.produire(RESERVER);
+					po.produire(nombreDeVariableGlobale);
+				}
+			break;
+			
+			case 3://Ajout des constantes dans la table des symboles
+				int adresseConstante = presentIdent(1);
+				
+				if(adresseConstante == 0) {
+					placeIdent(UtilLex.numId, CONSTANTE, tCour, vCour);
+				} else {
+					UtilLex.messErr("Constante dÃ©jÃ  dÃ©clarÃ©e");
+				}
+			break;
+			
+			case 4://DÃ©claration du type entier
+				tCour = ENT;
+			break;
+			
+			case 5://DÃ©claration du type booleen
+				tCour = BOOL;
+			break;
+			
+			case 6://Initialisation de la valeur pour un entier positif
+				vCour = UtilLex.valNb;
+			break;
+			
+			case 7://Initialisation de la valeur pour un Entier nÃ©gatif
+				vCour = -UtilLex.valNb;
+			break;
+			
+			case 8://Initialisation de la valeur Ã  vrai
+				vCour = VRAI;
+			break;
+			
+			case 9://Initialisation de la valeur Ã  faux
+				vCour = FAUX;
+			break;
+			
+			case 255:
+				afftabSymb();
+			break;
+			
+			default:
+				System.out.println("Point de gï¿½nï¿½ration non prï¿½vu dans votre liste");
 			break;
 
 		}

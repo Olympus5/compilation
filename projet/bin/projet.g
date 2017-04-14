@@ -1,10 +1,10 @@
 // Grammaire du langage PROJET
 // COMP L3  
-// Anne Grazon, Véronique Masson
-// il convient d'y insérer les appels à {PtGen.pt(k);}
-// relancer Antlr après chaque modification et raffraichir le projet Eclipse le cas échéant
+// Anne Grazon, Vï¿½ronique Masson
+// il convient d'y insï¿½rer les appels ï¿½ {PtGen.pt(k);}
+// relancer Antlr aprï¿½s chaque modification et raffraichir le projet Eclipse le cas ï¿½chï¿½ant
 
-// attention l'analyse est poursuivie après erreur si l'on supprime la clause rulecatch
+// attention l'analyse est poursuivie aprï¿½s erreur si l'on supprime la clause rulecatch
 
 grammar projet;
 
@@ -26,10 +26,10 @@ import java.io.FileInputStream;
 @members {
 
  
-// variables globales et méthodes utiles à placer ici
+// variables globales et mï¿½thodes utiles ï¿½ placer ici
   
 }
-// la directive rulecatch permet d'interrompre l'analyse à la première erreur de syntaxe
+// la directive rulecatch permet d'interrompre l'analyse ï¿½ la premiï¿½re erreur de syntaxe
 @rulecatch {
 catch (RecognitionException e) {reportError (e) ; throw e ; }}
 
@@ -41,8 +41,8 @@ unite  :   unitprog  EOF
 unitprog
   : 'programme' ident ':'  
      declarations  
-     corps { System.out.println("succès, arret de la compilation "); }
-  ;
+     corps { System.out.println("succï¿½s, arret de la compilation "); }
+  {PtGen.pt(255);};
   
 unitmodule
   : 'module' ident ':' 
@@ -64,14 +64,14 @@ specif  : ident  ( 'fixe' '(' type  ( ',' type  )* ')' )?
                  ( 'mod'  '(' type  ( ',' type  )* ')' )? 
   ;
   
-consts  : 'const' ( ident  '=' valeur  ptvg  )+ 
+consts  : 'const' ( ident '=' valeur  ptvg {PtGen.pt(3);})+ 
   ;
   
-vars  : 'var' ( type ident  ( ','  ident  )* ptvg  )+
+vars  : 'var' ( type ident {PtGen.pt(1);}  ( ','  ident  {PtGen.pt(1);})* ptvg )+{PtGen.pt(2);}
   ;
   
-type  : 'ent'  
-  |     'bool' 
+type  : 'ent' {PtGen.pt(4);} 
+  |     'bool' {PtGen.pt(5);} 
   ;
   
 decprocs: (decproc ptvg)+
@@ -179,25 +179,25 @@ primaire: valeur
   | '(' expression ')'
   ;
   
-valeur  : nbentier 
-  | '+' nbentier 
-  | '-' nbentier 
-  | 'vrai' 
-  | 'faux' 
+valeur  : nbentier {PtGen.pt(4);PtGen.pt(6);}
+  | '+' nbentier {PtGen.pt(4);PtGen.pt(6);}
+  | '-' nbentier {PtGen.pt(4);PtGen.pt(7);}
+  | 'vrai' {PtGen.pt(5);PtGen.pt(8);}
+  | 'faux' {PtGen.pt(5);PtGen.pt(9);}
   ;
 
-// partie lexicale  : cette partie ne doit pas être modifiée  //
-// les unités lexicales de ANTLR doivent commencer par une majuscule
-// attention : ANTLR n'autorise pas certains traitements sur les unités lexicales, 
-// il est alors nécessaire de passer par un non-terminal intermédiaire 
-// exemple : pour l'unité lexicale INT, le non-terminal nbentier a dû être introduit
+// partie lexicale  : cette partie ne doit pas ï¿½tre modifiï¿½e  //
+// les unitï¿½s lexicales de ANTLR doivent commencer par une majuscule
+// attention : ANTLR n'autorise pas certains traitements sur les unitï¿½s lexicales, 
+// il est alors nï¿½cessaire de passer par un non-terminal intermï¿½diaire 
+// exemple : pour l'unitï¿½ lexicale INT, le non-terminal nbentier a dï¿½ ï¿½tre introduit
  
       
-nbentier  :   INT { UtilLex.valNb = Integer.parseInt($INT.text);}; // mise à jour de valNb
+nbentier  :   INT { UtilLex.valNb = Integer.parseInt($INT.text);}; // mise ï¿½ jour de valNb
 
-ident : ID  { UtilLex.traiterId($ID.text, $ID.line); } ; // mise à jour de numId
-     // tous les identificateurs seront placés dans la table des identificateurs, y compris le nom du programme ou module
-     // la table des symboles n'est pas gérée au niveau lexical
+ident : ID  { UtilLex.traiterId($ID.text, $ID.line); } ; // mise ï¿½ jour de numId
+     // tous les identificateurs seront placï¿½s dans la table des identificateurs, y compris le nom du programme ou module
+     // la table des symboles n'est pas gï¿½rï¿½e au niveau lexical
         
   
 ID  :   ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ; 
@@ -205,12 +205,12 @@ ID  :   ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
 // zone purement lexicale //
 
 INT :   '0'..'9'+ ;
-WS  :   (' '|'\t' | '\n' |'\r')+ {skip();} ; // définition des "espaces"
+WS  :   (' '|'\t' | '\n' |'\r')+ {skip();} ; // dï¿½finition des "espaces"
 
 
 COMMENT
-  :  '\{' (.)* '\}' {skip();}   // toute suite de caractères entourée d'accolades est un commentaire
-  |  '#' ~( '\r' | '\n' )* {skip();}  // tout ce qui suit un caractère dièse sur une ligne est un commentaire
+  :  '\{' (.)* '\}' {skip();}   // toute suite de caractï¿½res entourï¿½e d'accolades est un commentaire
+  |  '#' ~( '\r' | '\n' )* {skip();}  // tout ce qui suit un caractï¿½re diï¿½se sur une ligne est un commentaire
   ;
 
 // commentaires sur plusieurs lignes
