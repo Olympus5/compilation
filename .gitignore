@@ -13,3 +13,4 @@ hs_err_pid*
 
 #Ignore Eclipse metadata
 .metadata/
+projet/.metadata/

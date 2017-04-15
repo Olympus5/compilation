@@ -118,6 +118,8 @@ public class PtGen {
 	
 	//Variable complémentaire
 	private static int nombreDeVariableGlobale;
+	private static int tOperation;
+	private static int adresseIdentAffectation;
 	
 	// utilitaire de recherche de l'ident courant (ayant pour code UtilLex.numId) dans tabSymb
 	// rend en r�sultat l'indice de cet ident dans tabSymb (O si absence)
@@ -187,6 +189,7 @@ public class PtGen {
 		
 		//Initialisation des variable personnels
 		nombreDeVariableGlobale = 0;
+		adresseIdentAffectation = 0;
 	} // initialisations
 
 	// code des points de g�n�ration A COMPLETER
@@ -203,7 +206,7 @@ public class PtGen {
 			
 			/*
 			 * Declaration et Affectation -> 1-20
-			 * Lecture et Ecriture -> 21-41
+			 * Opérations -> 21-41
 			 */
 			
 			
@@ -263,28 +266,148 @@ public class PtGen {
 				vCour = FAUX;
 			break;
 			
+			case 10://Initialisation des variables pour gérer l'affection de valeur
+				adresseIdentAffectation = presentIdent(0);
+				
+				if(adresseIdentAffectation != 0) {
+					if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
+						tCour = tOperation = tabSymb[adresseIdentAffectation].type;
+					} else {
+						UtilLex.messErr("Catégorie non autorisé pour l'affectation");
+					}
+				} else {
+					UtilLex.messErr("Affectation impossible car identifiant inexistant");
+				}
+			break;
+			
+			case 11://Affectation de valeur
+				if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
+					po.produire(AFFECTERG);
+					po.produire(tabSymb[adresseIdentAffectation].info);
+				} 
+			break;
+			
+			case 21:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(OU);
+			break;
+			
+			case 22:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(ET);
+			break;
+			
+			case 23:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(NON);
+			break;
+			
+			case 24:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(EG);
+			break;
+			
+			case 25:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(DIFF);
+			break;
+			
+			case 26:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(SUP);
+			break;
+			
+			case 27:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(SUPEG);
+			break;
+			
+			case 28:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(INF);
+			break;
+			
+			case 29:
+				if(adresseIdentAffectation != 0) tOperation = BOOL;
+				po.produire(INFEG);
+			break;
+			
+			case 30:
+				if(adresseIdentAffectation != 0) tOperation = ENT;
+				po.produire(ADD);
+			break;
+			
+			case 31:
+				if(adresseIdentAffectation != 0) tOperation = ENT;
+				po.produire(SOUS);
+			break;
+			
+			case 32:
+				if(adresseIdentAffectation != 0) tOperation = ENT;
+				po.produire(MUL);
+			break;
+			
+			case 33:
+				if(adresseIdentAffectation != 0) tOperation = ENT;
+				po.produire(DIV);
+			break;
+			
+			case 34://Gestion des valeurs lors d'opérations
+				if(tOperation == ENT) {
+					verifEnt();
+				} else {
+					verifBool();
+				}
+				
+				po.produire(EMPILER);
+				po.produire(vCour);
+			break;
+			
+			case 35://Gestion des constantes et des variables lors d'opérations
+				int adresseIdentATraiter = presentIdent(1);
+				
+				if(adresseIdentATraiter != 0) {
+					if(tabSymb[adresseIdentATraiter].categorie == CONSTANTE) {
+						tCour = tabSymb[adresseIdentATraiter].type;
+						vCour = tabSymb[adresseIdentATraiter].info;
+						
+						if(tOperation == ENT) {
+							verifEnt();
+						} else {
+							verifBool();
+						}
+						
+						po.produire(EMPILER);
+						po.produire(vCour);
+					} else if(tabSymb[adresseIdentATraiter].categorie == VARGLOBALE) {
+						tCour = tabSymb[adresseIdentATraiter].type;
+						vCour = tabSymb[adresseIdentATraiter].info;
+						
+						if(tOperation == ENT) {
+							verifEnt();
+						} else {
+							verifBool();
+						}
+						
+						po.produire(CONTENUG);
+						po.produire(tabSymb[adresseIdentATraiter].info);
+					} else {
+						UtilLex.messErr("Categorie de symbole impossible à affecter");
+					}
+				} else {
+					UtilLex.messErr("Opérattion impossible: variable ou constante inexistante");
+				}
+			break;
+			
 			case 255:
+				po.produire(ARRET);
 				afftabSymb();
 			break;
 			
 			default:
-				System.out.println("Point de g�n�ration non pr�vu dans votre liste");
+				System.out.println("Point de génération non prévu dans votre liste");
 			break;
 
 		}
 	}
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 
