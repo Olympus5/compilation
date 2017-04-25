@@ -1,0 +1,10 @@
+FICHIER affectation.gen : 
+
+   1  rýserver        5
+   3  empiler         2
+   5  affecterg       0
+   7  contenug        0
+   9  affecterg       1
+  11  empiler         1
+  13  affecterg       2
+  15  arrýt     

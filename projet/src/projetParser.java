@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 ./projet.g 2017-04-14 00:22:02
+// $ANTLR 3.5.2 projet.g 2017-04-25 16:44:07
            
 import java.io.IOException;
 import java.io.DataInputStream;
@@ -90,7 +90,7 @@ public class projetParser extends Parser {
 	}
 
 	@Override public String[] getTokenNames() { return projetParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "./projet.g"; }
+	@Override public String getGrammarFileName() { return "projet.g"; }
 
 
 
@@ -101,10 +101,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "unite"
-	// ./projet.g:37:1: unite : ( unitprog EOF | unitmodule EOF );
+	// projet.g:37:1: unite : ( unitprog EOF | unitmodule EOF );
 	public final void unite() throws RecognitionException {
 		try {
-			// ./projet.g:37:8: ( unitprog EOF | unitmodule EOF )
+			// projet.g:37:8: ( unitprog EOF | unitmodule EOF )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0==48) ) {
@@ -122,7 +122,7 @@ public class projetParser extends Parser {
 
 			switch (alt1) {
 				case 1 :
-					// ./projet.g:37:12: unitprog EOF
+					// projet.g:37:12: unitprog EOF
 					{
 					pushFollow(FOLLOW_unitprog_in_unite64);
 					unitprog();
@@ -132,7 +132,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./projet.g:38:12: unitmodule EOF
+					// projet.g:38:12: unitmodule EOF
 					{
 					pushFollow(FOLLOW_unitmodule_in_unite80);
 					unitmodule();
@@ -155,11 +155,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "unitprog"
-	// ./projet.g:41:1: unitprog : 'programme' ident ':' declarations corps ;
+	// projet.g:41:1: unitprog : 'programme' ident ':' declarations corps ;
 	public final void unitprog() throws RecognitionException {
 		try {
-			// ./projet.g:42:3: ( 'programme' ident ':' declarations corps )
-			// ./projet.g:42:5: 'programme' ident ':' declarations corps
+			// projet.g:42:3: ( 'programme' ident ':' declarations corps )
+			// projet.g:42:5: 'programme' ident ':' declarations corps
 			{
 			match(input,48,FOLLOW_48_in_unitprog98); 
 			pushFollow(FOLLOW_ident_in_unitprog100);
@@ -191,11 +191,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "unitmodule"
-	// ./projet.g:47:1: unitmodule : 'module' ident ':' declarations ;
+	// projet.g:47:1: unitmodule : 'module' ident ':' declarations ;
 	public final void unitmodule() throws RecognitionException {
 		try {
-			// ./projet.g:48:3: ( 'module' ident ':' declarations )
-			// ./projet.g:48:5: 'module' ident ':' declarations
+			// projet.g:48:3: ( 'module' ident ':' declarations )
+			// projet.g:48:5: 'module' ident ':' declarations
 			{
 			match(input,44,FOLLOW_44_in_unitmodule138); 
 			pushFollow(FOLLOW_ident_in_unitmodule140);
@@ -221,13 +221,13 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "declarations"
-	// ./projet.g:52:1: declarations : ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )? ;
+	// projet.g:52:1: declarations : ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )? ;
 	public final void declarations() throws RecognitionException {
 		try {
-			// ./projet.g:53:3: ( ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )? )
-			// ./projet.g:53:5: ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )?
+			// projet.g:53:3: ( ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )? )
+			// projet.g:53:5: ( partiedef )? ( partieref )? ( consts )? ( vars )? ( decprocs )?
 			{
-			// ./projet.g:53:5: ( partiedef )?
+			// projet.g:53:5: ( partiedef )?
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==30) ) {
@@ -235,7 +235,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt2) {
 				case 1 :
-					// ./projet.g:53:5: partiedef
+					// projet.g:53:5: partiedef
 					{
 					pushFollow(FOLLOW_partiedef_in_declarations168);
 					partiedef();
@@ -246,7 +246,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:53:16: ( partieref )?
+			// projet.g:53:16: ( partieref )?
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==49) ) {
@@ -254,7 +254,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt3) {
 				case 1 :
-					// ./projet.g:53:16: partieref
+					// projet.g:53:16: partieref
 					{
 					pushFollow(FOLLOW_partieref_in_declarations171);
 					partieref();
@@ -265,7 +265,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:53:27: ( consts )?
+			// projet.g:53:27: ( consts )?
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0==28) ) {
@@ -273,7 +273,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt4) {
 				case 1 :
-					// ./projet.g:53:27: consts
+					// projet.g:53:27: consts
 					{
 					pushFollow(FOLLOW_consts_in_declarations174);
 					consts();
@@ -284,7 +284,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:53:35: ( vars )?
+			// projet.g:53:35: ( vars )?
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0==53) ) {
@@ -292,7 +292,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt5) {
 				case 1 :
-					// ./projet.g:53:35: vars
+					// projet.g:53:35: vars
 					{
 					pushFollow(FOLLOW_vars_in_declarations177);
 					vars();
@@ -303,7 +303,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:53:41: ( decprocs )?
+			// projet.g:53:41: ( decprocs )?
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0==47) ) {
@@ -311,7 +311,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt6) {
 				case 1 :
-					// ./projet.g:53:41: decprocs
+					// projet.g:53:41: decprocs
 					{
 					pushFollow(FOLLOW_decprocs_in_declarations180);
 					decprocs();
@@ -336,18 +336,18 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "partiedef"
-	// ./projet.g:56:1: partiedef : 'def' ident ( ',' ident )* ptvg ;
+	// projet.g:56:1: partiedef : 'def' ident ( ',' ident )* ptvg ;
 	public final void partiedef() throws RecognitionException {
 		try {
-			// ./projet.g:57:3: ( 'def' ident ( ',' ident )* ptvg )
-			// ./projet.g:57:5: 'def' ident ( ',' ident )* ptvg
+			// projet.g:57:3: ( 'def' ident ( ',' ident )* ptvg )
+			// projet.g:57:5: 'def' ident ( ',' ident )* ptvg
 			{
 			match(input,30,FOLLOW_30_in_partiedef197); 
 			pushFollow(FOLLOW_ident_in_partiedef199);
 			ident();
 			state._fsp--;
 
-			// ./projet.g:57:18: ( ',' ident )*
+			// projet.g:57:18: ( ',' ident )*
 			loop7:
 			while (true) {
 				int alt7=2;
@@ -358,7 +358,7 @@ public class projetParser extends Parser {
 
 				switch (alt7) {
 				case 1 :
-					// ./projet.g:57:19: ',' ident
+					// projet.g:57:19: ',' ident
 					{
 					match(input,13,FOLLOW_13_in_partiedef203); 
 					pushFollow(FOLLOW_ident_in_partiedef205);
@@ -391,18 +391,18 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "partieref"
-	// ./projet.g:60:1: partieref : 'ref' specif ( ',' specif )* ptvg ;
+	// projet.g:60:1: partieref : 'ref' specif ( ',' specif )* ptvg ;
 	public final void partieref() throws RecognitionException {
 		try {
-			// ./projet.g:60:10: ( 'ref' specif ( ',' specif )* ptvg )
-			// ./projet.g:60:12: 'ref' specif ( ',' specif )* ptvg
+			// projet.g:60:10: ( 'ref' specif ( ',' specif )* ptvg )
+			// projet.g:60:12: 'ref' specif ( ',' specif )* ptvg
 			{
 			match(input,49,FOLLOW_49_in_partieref222); 
 			pushFollow(FOLLOW_specif_in_partieref225);
 			specif();
 			state._fsp--;
 
-			// ./projet.g:60:26: ( ',' specif )*
+			// projet.g:60:26: ( ',' specif )*
 			loop8:
 			while (true) {
 				int alt8=2;
@@ -413,7 +413,7 @@ public class projetParser extends Parser {
 
 				switch (alt8) {
 				case 1 :
-					// ./projet.g:60:27: ',' specif
+					// projet.g:60:27: ',' specif
 					{
 					match(input,13,FOLLOW_13_in_partieref228); 
 					pushFollow(FOLLOW_specif_in_partieref230);
@@ -446,17 +446,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "specif"
-	// ./projet.g:63:1: specif : ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )? ;
+	// projet.g:63:1: specif : ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )? ;
 	public final void specif() throws RecognitionException {
 		try {
-			// ./projet.g:63:9: ( ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )? )
-			// ./projet.g:63:11: ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )?
+			// projet.g:63:9: ( ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )? )
+			// projet.g:63:11: ident ( 'fixe' '(' type ( ',' type )* ')' )? ( 'mod' '(' type ( ',' type )* ')' )?
 			{
 			pushFollow(FOLLOW_ident_in_specif248);
 			ident();
 			state._fsp--;
 
-			// ./projet.g:63:18: ( 'fixe' '(' type ( ',' type )* ')' )?
+			// projet.g:63:18: ( 'fixe' '(' type ( ',' type )* ')' )?
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==40) ) {
@@ -464,7 +464,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt10) {
 				case 1 :
-					// ./projet.g:63:20: 'fixe' '(' type ( ',' type )* ')'
+					// projet.g:63:20: 'fixe' '(' type ( ',' type )* ')'
 					{
 					match(input,40,FOLLOW_40_in_specif253); 
 					match(input,9,FOLLOW_9_in_specif255); 
@@ -472,7 +472,7 @@ public class projetParser extends Parser {
 					type();
 					state._fsp--;
 
-					// ./projet.g:63:37: ( ',' type )*
+					// projet.g:63:37: ( ',' type )*
 					loop9:
 					while (true) {
 						int alt9=2;
@@ -483,7 +483,7 @@ public class projetParser extends Parser {
 
 						switch (alt9) {
 						case 1 :
-							// ./projet.g:63:39: ',' type
+							// projet.g:63:39: ',' type
 							{
 							match(input,13,FOLLOW_13_in_specif262); 
 							pushFollow(FOLLOW_type_in_specif264);
@@ -504,7 +504,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:64:18: ( 'mod' '(' type ( ',' type )* ')' )?
+			// projet.g:64:18: ( 'mod' '(' type ( ',' type )* ')' )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0==43) ) {
@@ -512,7 +512,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt12) {
 				case 1 :
-					// ./projet.g:64:20: 'mod' '(' type ( ',' type )* ')'
+					// projet.g:64:20: 'mod' '(' type ( ',' type )* ')'
 					{
 					match(input,43,FOLLOW_43_in_specif295); 
 					match(input,9,FOLLOW_9_in_specif298); 
@@ -520,7 +520,7 @@ public class projetParser extends Parser {
 					type();
 					state._fsp--;
 
-					// ./projet.g:64:37: ( ',' type )*
+					// projet.g:64:37: ( ',' type )*
 					loop11:
 					while (true) {
 						int alt11=2;
@@ -531,7 +531,7 @@ public class projetParser extends Parser {
 
 						switch (alt11) {
 						case 1 :
-							// ./projet.g:64:39: ',' type
+							// projet.g:64:39: ',' type
 							{
 							match(input,13,FOLLOW_13_in_specif305); 
 							pushFollow(FOLLOW_type_in_specif307);
@@ -566,14 +566,14 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "consts"
-	// ./projet.g:67:1: consts : 'const' ( ident '=' valeur ptvg )+ ;
+	// projet.g:67:1: consts : 'const' ( ident '=' valeur ptvg )+ ;
 	public final void consts() throws RecognitionException {
 		try {
-			// ./projet.g:67:9: ( 'const' ( ident '=' valeur ptvg )+ )
-			// ./projet.g:67:11: 'const' ( ident '=' valeur ptvg )+
+			// projet.g:67:9: ( 'const' ( ident '=' valeur ptvg )+ )
+			// projet.g:67:11: 'const' ( ident '=' valeur ptvg )+
 			{
 			match(input,28,FOLLOW_28_in_consts331); 
-			// ./projet.g:67:19: ( ident '=' valeur ptvg )+
+			// projet.g:67:19: ( ident '=' valeur ptvg )+
 			int cnt13=0;
 			loop13:
 			while (true) {
@@ -585,7 +585,7 @@ public class projetParser extends Parser {
 
 				switch (alt13) {
 				case 1 :
-					// ./projet.g:67:21: ident '=' valeur ptvg
+					// projet.g:67:21: ident '=' valeur ptvg
 					{
 					pushFollow(FOLLOW_ident_in_consts335);
 					ident();
@@ -626,14 +626,14 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "vars"
-	// ./projet.g:70:1: vars : 'var' ( type ident ( ',' ident )* ptvg )+ ;
+	// projet.g:70:1: vars : 'var' ( type ident ( ',' ident )* ptvg )+ ;
 	public final void vars() throws RecognitionException {
 		try {
-			// ./projet.g:70:7: ( 'var' ( type ident ( ',' ident )* ptvg )+ )
-			// ./projet.g:70:9: 'var' ( type ident ( ',' ident )* ptvg )+
+			// projet.g:70:7: ( 'var' ( type ident ( ',' ident )* ptvg )+ )
+			// projet.g:70:9: 'var' ( type ident ( ',' ident )* ptvg )+
 			{
 			match(input,53,FOLLOW_53_in_vars361); 
-			// ./projet.g:70:15: ( type ident ( ',' ident )* ptvg )+
+			// projet.g:70:15: ( type ident ( ',' ident )* ptvg )+
 			int cnt15=0;
 			loop15:
 			while (true) {
@@ -645,7 +645,7 @@ public class projetParser extends Parser {
 
 				switch (alt15) {
 				case 1 :
-					// ./projet.g:70:17: type ident ( ',' ident )* ptvg
+					// projet.g:70:17: type ident ( ',' ident )* ptvg
 					{
 					pushFollow(FOLLOW_type_in_vars365);
 					type();
@@ -656,7 +656,7 @@ public class projetParser extends Parser {
 					state._fsp--;
 
 					PtGen.pt(1);
-					// ./projet.g:70:44: ( ',' ident )*
+					// projet.g:70:44: ( ',' ident )*
 					loop14:
 					while (true) {
 						int alt14=2;
@@ -667,7 +667,7 @@ public class projetParser extends Parser {
 
 						switch (alt14) {
 						case 1 :
-							// ./projet.g:70:46: ',' ident
+							// projet.g:70:46: ',' ident
 							{
 							match(input,13,FOLLOW_13_in_vars374); 
 							pushFollow(FOLLOW_ident_in_vars377);
@@ -713,10 +713,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "type"
-	// ./projet.g:73:1: type : ( 'ent' | 'bool' );
+	// projet.g:73:1: type : ( 'ent' | 'bool' );
 	public final void type() throws RecognitionException {
 		try {
-			// ./projet.g:73:7: ( 'ent' | 'bool' )
+			// projet.g:73:7: ( 'ent' | 'bool' )
 			int alt16=2;
 			int LA16_0 = input.LA(1);
 			if ( (LA16_0==33) ) {
@@ -734,14 +734,14 @@ public class projetParser extends Parser {
 
 			switch (alt16) {
 				case 1 :
-					// ./projet.g:73:9: 'ent'
+					// projet.g:73:9: 'ent'
 					{
 					match(input,33,FOLLOW_33_in_type402); 
 					PtGen.pt(4);
 					}
 					break;
 				case 2 :
-					// ./projet.g:74:9: 'bool'
+					// projet.g:74:9: 'bool'
 					{
 					match(input,26,FOLLOW_26_in_type415); 
 					PtGen.pt(5);
@@ -761,13 +761,13 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "decprocs"
-	// ./projet.g:77:1: decprocs : ( decproc ptvg )+ ;
+	// projet.g:77:1: decprocs : ( decproc ptvg )+ ;
 	public final void decprocs() throws RecognitionException {
 		try {
-			// ./projet.g:77:9: ( ( decproc ptvg )+ )
-			// ./projet.g:77:11: ( decproc ptvg )+
+			// projet.g:77:9: ( ( decproc ptvg )+ )
+			// projet.g:77:11: ( decproc ptvg )+
 			{
-			// ./projet.g:77:11: ( decproc ptvg )+
+			// projet.g:77:11: ( decproc ptvg )+
 			int cnt17=0;
 			loop17:
 			while (true) {
@@ -779,7 +779,7 @@ public class projetParser extends Parser {
 
 				switch (alt17) {
 				case 1 :
-					// ./projet.g:77:12: decproc ptvg
+					// projet.g:77:12: decproc ptvg
 					{
 					pushFollow(FOLLOW_decproc_in_decprocs431);
 					decproc();
@@ -814,18 +814,18 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "decproc"
-	// ./projet.g:80:1: decproc : 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps ;
+	// projet.g:80:1: decproc : 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps ;
 	public final void decproc() throws RecognitionException {
 		try {
-			// ./projet.g:80:9: ( 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps )
-			// ./projet.g:80:12: 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps
+			// projet.g:80:9: ( 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps )
+			// projet.g:80:12: 'proc' ident ( parfixe )? ( parmod )? ( consts )? ( vars )? corps
 			{
 			match(input,47,FOLLOW_47_in_decproc449); 
 			pushFollow(FOLLOW_ident_in_decproc452);
 			ident();
 			state._fsp--;
 
-			// ./projet.g:80:27: ( parfixe )?
+			// projet.g:80:27: ( parfixe )?
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0==40) ) {
@@ -833,7 +833,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt18) {
 				case 1 :
-					// ./projet.g:80:27: parfixe
+					// projet.g:80:27: parfixe
 					{
 					pushFollow(FOLLOW_parfixe_in_decproc455);
 					parfixe();
@@ -844,7 +844,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:80:36: ( parmod )?
+			// projet.g:80:36: ( parmod )?
 			int alt19=2;
 			int LA19_0 = input.LA(1);
 			if ( (LA19_0==43) ) {
@@ -852,7 +852,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt19) {
 				case 1 :
-					// ./projet.g:80:36: parmod
+					// projet.g:80:36: parmod
 					{
 					pushFollow(FOLLOW_parmod_in_decproc458);
 					parmod();
@@ -863,7 +863,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:80:44: ( consts )?
+			// projet.g:80:44: ( consts )?
 			int alt20=2;
 			int LA20_0 = input.LA(1);
 			if ( (LA20_0==28) ) {
@@ -871,7 +871,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt20) {
 				case 1 :
-					// ./projet.g:80:44: consts
+					// projet.g:80:44: consts
 					{
 					pushFollow(FOLLOW_consts_in_decproc461);
 					consts();
@@ -882,7 +882,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:80:52: ( vars )?
+			// projet.g:80:52: ( vars )?
 			int alt21=2;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0==53) ) {
@@ -890,7 +890,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt21) {
 				case 1 :
-					// ./projet.g:80:52: vars
+					// projet.g:80:52: vars
 					{
 					pushFollow(FOLLOW_vars_in_decproc464);
 					vars();
@@ -919,10 +919,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "ptvg"
-	// ./projet.g:83:1: ptvg : ( ';' |);
+	// projet.g:83:1: ptvg : ( ';' |);
 	public final void ptvg() throws RecognitionException {
 		try {
-			// ./projet.g:83:7: ( ';' |)
+			// projet.g:83:7: ( ';' |)
 			int alt22=2;
 			int LA22_0 = input.LA(1);
 			if ( (LA22_0==17) ) {
@@ -940,13 +940,13 @@ public class projetParser extends Parser {
 
 			switch (alt22) {
 				case 1 :
-					// ./projet.g:83:9: ';'
+					// projet.g:83:9: ';'
 					{
 					match(input,17,FOLLOW_17_in_ptvg482); 
 					}
 					break;
 				case 2 :
-					// ./projet.g:85:3: 
+					// projet.g:85:3: 
 					{
 					}
 					break;
@@ -964,11 +964,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "corps"
-	// ./projet.g:87:1: corps : 'debut' instructions 'fin' ;
+	// projet.g:87:1: corps : 'debut' instructions 'fin' ;
 	public final void corps() throws RecognitionException {
 		try {
-			// ./projet.g:87:7: ( 'debut' instructions 'fin' )
-			// ./projet.g:87:9: 'debut' instructions 'fin'
+			// projet.g:87:7: ( 'debut' instructions 'fin' )
+			// projet.g:87:9: 'debut' instructions 'fin'
 			{
 			match(input,29,FOLLOW_29_in_corps500); 
 			pushFollow(FOLLOW_instructions_in_corps502);
@@ -990,11 +990,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "parfixe"
-	// ./projet.g:90:1: parfixe : 'fixe' '(' pf ( ';' pf )* ')' ;
+	// projet.g:90:1: parfixe : 'fixe' '(' pf ( ';' pf )* ')' ;
 	public final void parfixe() throws RecognitionException {
 		try {
-			// ./projet.g:90:8: ( 'fixe' '(' pf ( ';' pf )* ')' )
-			// ./projet.g:90:10: 'fixe' '(' pf ( ';' pf )* ')'
+			// projet.g:90:8: ( 'fixe' '(' pf ( ';' pf )* ')' )
+			// projet.g:90:10: 'fixe' '(' pf ( ';' pf )* ')'
 			{
 			match(input,40,FOLLOW_40_in_parfixe516); 
 			match(input,9,FOLLOW_9_in_parfixe518); 
@@ -1002,7 +1002,7 @@ public class projetParser extends Parser {
 			pf();
 			state._fsp--;
 
-			// ./projet.g:90:24: ( ';' pf )*
+			// projet.g:90:24: ( ';' pf )*
 			loop23:
 			while (true) {
 				int alt23=2;
@@ -1013,7 +1013,7 @@ public class projetParser extends Parser {
 
 				switch (alt23) {
 				case 1 :
-					// ./projet.g:90:26: ';' pf
+					// projet.g:90:26: ';' pf
 					{
 					match(input,17,FOLLOW_17_in_parfixe524); 
 					pushFollow(FOLLOW_pf_in_parfixe526);
@@ -1043,11 +1043,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "pf"
-	// ./projet.g:93:1: pf : type ident ( ',' ident )* ;
+	// projet.g:93:1: pf : type ident ( ',' ident )* ;
 	public final void pf() throws RecognitionException {
 		try {
-			// ./projet.g:93:5: ( type ident ( ',' ident )* )
-			// ./projet.g:93:7: type ident ( ',' ident )*
+			// projet.g:93:5: ( type ident ( ',' ident )* )
+			// projet.g:93:7: type ident ( ',' ident )*
 			{
 			pushFollow(FOLLOW_type_in_pf544);
 			type();
@@ -1057,7 +1057,7 @@ public class projetParser extends Parser {
 			ident();
 			state._fsp--;
 
-			// ./projet.g:93:19: ( ',' ident )*
+			// projet.g:93:19: ( ',' ident )*
 			loop24:
 			while (true) {
 				int alt24=2;
@@ -1068,7 +1068,7 @@ public class projetParser extends Parser {
 
 				switch (alt24) {
 				case 1 :
-					// ./projet.g:93:21: ',' ident
+					// projet.g:93:21: ',' ident
 					{
 					match(input,13,FOLLOW_13_in_pf551); 
 					pushFollow(FOLLOW_ident_in_pf553);
@@ -1097,11 +1097,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "parmod"
-	// ./projet.g:96:1: parmod : 'mod' '(' pm ( ';' pm )* ')' ;
+	// projet.g:96:1: parmod : 'mod' '(' pm ( ';' pm )* ')' ;
 	public final void parmod() throws RecognitionException {
 		try {
-			// ./projet.g:96:9: ( 'mod' '(' pm ( ';' pm )* ')' )
-			// ./projet.g:96:11: 'mod' '(' pm ( ';' pm )* ')'
+			// projet.g:96:9: ( 'mod' '(' pm ( ';' pm )* ')' )
+			// projet.g:96:11: 'mod' '(' pm ( ';' pm )* ')'
 			{
 			match(input,43,FOLLOW_43_in_parmod571); 
 			match(input,9,FOLLOW_9_in_parmod573); 
@@ -1109,7 +1109,7 @@ public class projetParser extends Parser {
 			pm();
 			state._fsp--;
 
-			// ./projet.g:96:24: ( ';' pm )*
+			// projet.g:96:24: ( ';' pm )*
 			loop25:
 			while (true) {
 				int alt25=2;
@@ -1120,7 +1120,7 @@ public class projetParser extends Parser {
 
 				switch (alt25) {
 				case 1 :
-					// ./projet.g:96:26: ';' pm
+					// projet.g:96:26: ';' pm
 					{
 					match(input,17,FOLLOW_17_in_parmod579); 
 					pushFollow(FOLLOW_pm_in_parmod581);
@@ -1150,11 +1150,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "pm"
-	// ./projet.g:99:1: pm : type ident ( ',' ident )* ;
+	// projet.g:99:1: pm : type ident ( ',' ident )* ;
 	public final void pm() throws RecognitionException {
 		try {
-			// ./projet.g:99:5: ( type ident ( ',' ident )* )
-			// ./projet.g:99:7: type ident ( ',' ident )*
+			// projet.g:99:5: ( type ident ( ',' ident )* )
+			// projet.g:99:7: type ident ( ',' ident )*
 			{
 			pushFollow(FOLLOW_type_in_pm599);
 			type();
@@ -1164,7 +1164,7 @@ public class projetParser extends Parser {
 			ident();
 			state._fsp--;
 
-			// ./projet.g:99:19: ( ',' ident )*
+			// projet.g:99:19: ( ',' ident )*
 			loop26:
 			while (true) {
 				int alt26=2;
@@ -1175,7 +1175,7 @@ public class projetParser extends Parser {
 
 				switch (alt26) {
 				case 1 :
-					// ./projet.g:99:21: ',' ident
+					// projet.g:99:21: ',' ident
 					{
 					match(input,13,FOLLOW_13_in_pm606); 
 					pushFollow(FOLLOW_ident_in_pm608);
@@ -1204,17 +1204,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "instructions"
-	// ./projet.g:102:1: instructions : instruction ( ';' instruction )* ;
+	// projet.g:102:1: instructions : instruction ( ';' instruction )* ;
 	public final void instructions() throws RecognitionException {
 		try {
-			// ./projet.g:103:3: ( instruction ( ';' instruction )* )
-			// ./projet.g:103:5: instruction ( ';' instruction )*
+			// projet.g:103:3: ( instruction ( ';' instruction )* )
+			// projet.g:103:5: instruction ( ';' instruction )*
 			{
 			pushFollow(FOLLOW_instruction_in_instructions627);
 			instruction();
 			state._fsp--;
 
-			// ./projet.g:103:17: ( ';' instruction )*
+			// projet.g:103:17: ( ';' instruction )*
 			loop27:
 			while (true) {
 				int alt27=2;
@@ -1225,7 +1225,7 @@ public class projetParser extends Parser {
 
 				switch (alt27) {
 				case 1 :
-					// ./projet.g:103:19: ';' instruction
+					// projet.g:103:19: ';' instruction
 					{
 					match(input,17,FOLLOW_17_in_instructions631); 
 					pushFollow(FOLLOW_instruction_in_instructions633);
@@ -1254,10 +1254,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "instruction"
-	// ./projet.g:106:1: instruction : ( inssi | inscond | boucle | lecture | ecriture | affouappel |);
+	// projet.g:106:1: instruction : ( inssi | inscond | boucle | lecture | ecriture | affouappel |);
 	public final void instruction() throws RecognitionException {
 		try {
-			// ./projet.g:107:3: ( inssi | inscond | boucle | lecture | ecriture | affouappel |)
+			// projet.g:107:3: ( inssi | inscond | boucle | lecture | ecriture | affouappel |)
 			int alt28=7;
 			switch ( input.LA(1) ) {
 			case 50:
@@ -1309,7 +1309,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt28) {
 				case 1 :
-					// ./projet.g:107:5: inssi
+					// projet.g:107:5: inssi
 					{
 					pushFollow(FOLLOW_inssi_in_instruction650);
 					inssi();
@@ -1318,7 +1318,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./projet.g:108:5: inscond
+					// projet.g:108:5: inscond
 					{
 					pushFollow(FOLLOW_inscond_in_instruction656);
 					inscond();
@@ -1327,7 +1327,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ./projet.g:109:5: boucle
+					// projet.g:109:5: boucle
 					{
 					pushFollow(FOLLOW_boucle_in_instruction662);
 					boucle();
@@ -1336,7 +1336,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ./projet.g:110:5: lecture
+					// projet.g:110:5: lecture
 					{
 					pushFollow(FOLLOW_lecture_in_instruction668);
 					lecture();
@@ -1345,7 +1345,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 5 :
-					// ./projet.g:111:5: ecriture
+					// projet.g:111:5: ecriture
 					{
 					pushFollow(FOLLOW_ecriture_in_instruction674);
 					ecriture();
@@ -1354,7 +1354,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 6 :
-					// ./projet.g:112:5: affouappel
+					// projet.g:112:5: affouappel
 					{
 					pushFollow(FOLLOW_affouappel_in_instruction680);
 					affouappel();
@@ -1363,7 +1363,7 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 7 :
-					// ./projet.g:114:3: 
+					// projet.g:114:3: 
 					{
 					}
 					break;
@@ -1381,11 +1381,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "inssi"
-	// ./projet.g:116:1: inssi : 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi' ;
+	// projet.g:116:1: inssi : 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi' ;
 	public final void inssi() throws RecognitionException {
 		try {
-			// ./projet.g:116:7: ( 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi' )
-			// ./projet.g:116:9: 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi'
+			// projet.g:116:7: ( 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi' )
+			// projet.g:116:9: 'si' expression 'alors' instructions ( 'sinon' instructions )? 'fsi'
 			{
 			match(input,50,FOLLOW_50_in_inssi697); 
 			pushFollow(FOLLOW_expression_in_inssi699);
@@ -1397,7 +1397,7 @@ public class projetParser extends Parser {
 			instructions();
 			state._fsp--;
 
-			// ./projet.g:116:46: ( 'sinon' instructions )?
+			// projet.g:116:46: ( 'sinon' instructions )?
 			int alt29=2;
 			int LA29_0 = input.LA(1);
 			if ( (LA29_0==51) ) {
@@ -1405,7 +1405,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt29) {
 				case 1 :
-					// ./projet.g:116:47: 'sinon' instructions
+					// projet.g:116:47: 'sinon' instructions
 					{
 					match(input,51,FOLLOW_51_in_inssi706); 
 					pushFollow(FOLLOW_instructions_in_inssi709);
@@ -1432,11 +1432,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "inscond"
-	// ./projet.g:119:1: inscond : 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond' ;
+	// projet.g:119:1: inscond : 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond' ;
 	public final void inscond() throws RecognitionException {
 		try {
-			// ./projet.g:119:9: ( 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond' )
-			// ./projet.g:119:11: 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond'
+			// projet.g:119:9: ( 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond' )
+			// projet.g:119:11: 'cond' expression ':' instructions ( ',' expression ':' instructions )* ( 'aut' instructions )? 'fcond'
 			{
 			match(input,27,FOLLOW_27_in_inscond727); 
 			pushFollow(FOLLOW_expression_in_inscond730);
@@ -1448,7 +1448,7 @@ public class projetParser extends Parser {
 			instructions();
 			state._fsp--;
 
-			// ./projet.g:120:11: ( ',' expression ':' instructions )*
+			// projet.g:120:11: ( ',' expression ':' instructions )*
 			loop30:
 			while (true) {
 				int alt30=2;
@@ -1459,7 +1459,7 @@ public class projetParser extends Parser {
 
 				switch (alt30) {
 				case 1 :
-					// ./projet.g:120:12: ',' expression ':' instructions
+					// projet.g:120:12: ',' expression ':' instructions
 					{
 					match(input,13,FOLLOW_13_in_inscond749); 
 					pushFollow(FOLLOW_expression_in_inscond752);
@@ -1479,7 +1479,7 @@ public class projetParser extends Parser {
 				}
 			}
 
-			// ./projet.g:121:11: ( 'aut' instructions )?
+			// projet.g:121:11: ( 'aut' instructions )?
 			int alt31=2;
 			int LA31_0 = input.LA(1);
 			if ( (LA31_0==25) ) {
@@ -1487,7 +1487,7 @@ public class projetParser extends Parser {
 			}
 			switch (alt31) {
 				case 1 :
-					// ./projet.g:121:12: 'aut' instructions
+					// projet.g:121:12: 'aut' instructions
 					{
 					match(input,25,FOLLOW_25_in_inscond774); 
 					pushFollow(FOLLOW_instructions_in_inscond777);
@@ -1514,11 +1514,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "boucle"
-	// ./projet.g:124:1: boucle : 'ttq' expression 'faire' instructions 'fait' ;
+	// projet.g:124:1: boucle : 'ttq' expression 'faire' instructions 'fait' ;
 	public final void boucle() throws RecognitionException {
 		try {
-			// ./projet.g:124:9: ( 'ttq' expression 'faire' instructions 'fait' )
-			// ./projet.g:124:11: 'ttq' expression 'faire' instructions 'fait'
+			// projet.g:124:9: ( 'ttq' expression 'faire' instructions 'fait' )
+			// projet.g:124:11: 'ttq' expression 'faire' instructions 'fait'
 			{
 			match(input,52,FOLLOW_52_in_boucle796); 
 			pushFollow(FOLLOW_expression_in_boucle799);
@@ -1545,11 +1545,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "lecture"
-	// ./projet.g:127:1: lecture : 'lire' '(' ident ( ',' ident )* ')' ;
+	// projet.g:127:1: lecture : 'lire' '(' ident ( ',' ident )* ')' ;
 	public final void lecture() throws RecognitionException {
 		try {
-			// ./projet.g:127:8: ( 'lire' '(' ident ( ',' ident )* ')' )
-			// ./projet.g:127:10: 'lire' '(' ident ( ',' ident )* ')'
+			// projet.g:127:8: ( 'lire' '(' ident ( ',' ident )* ')' )
+			// projet.g:127:10: 'lire' '(' ident ( ',' ident )* ')'
 			{
 			match(input,42,FOLLOW_42_in_lecture818); 
 			match(input,9,FOLLOW_9_in_lecture820); 
@@ -1557,7 +1557,7 @@ public class projetParser extends Parser {
 			ident();
 			state._fsp--;
 
-			// ./projet.g:127:28: ( ',' ident )*
+			// projet.g:127:28: ( ',' ident )*
 			loop32:
 			while (true) {
 				int alt32=2;
@@ -1568,7 +1568,7 @@ public class projetParser extends Parser {
 
 				switch (alt32) {
 				case 1 :
-					// ./projet.g:127:30: ',' ident
+					// projet.g:127:30: ',' ident
 					{
 					match(input,13,FOLLOW_13_in_lecture827); 
 					pushFollow(FOLLOW_ident_in_lecture829);
@@ -1598,11 +1598,11 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "ecriture"
-	// ./projet.g:130:1: ecriture : 'ecrire' '(' expression ( ',' expression )* ')' ;
+	// projet.g:130:1: ecriture : 'ecrire' '(' expression ( ',' expression )* ')' ;
 	public final void ecriture() throws RecognitionException {
 		try {
-			// ./projet.g:130:9: ( 'ecrire' '(' expression ( ',' expression )* ')' )
-			// ./projet.g:130:11: 'ecrire' '(' expression ( ',' expression )* ')'
+			// projet.g:130:9: ( 'ecrire' '(' expression ( ',' expression )* ')' )
+			// projet.g:130:11: 'ecrire' '(' expression ( ',' expression )* ')'
 			{
 			match(input,32,FOLLOW_32_in_ecriture848); 
 			match(input,9,FOLLOW_9_in_ecriture850); 
@@ -1610,7 +1610,7 @@ public class projetParser extends Parser {
 			expression();
 			state._fsp--;
 
-			// ./projet.g:130:36: ( ',' expression )*
+			// projet.g:130:36: ( ',' expression )*
 			loop33:
 			while (true) {
 				int alt33=2;
@@ -1621,7 +1621,7 @@ public class projetParser extends Parser {
 
 				switch (alt33) {
 				case 1 :
-					// ./projet.g:130:38: ',' expression
+					// projet.g:130:38: ',' expression
 					{
 					match(input,13,FOLLOW_13_in_ecriture857); 
 					pushFollow(FOLLOW_expression_in_ecriture859);
@@ -1651,17 +1651,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "affouappel"
-	// ./projet.g:133:1: affouappel : ident ( ':=' expression | ( effixes ( effmods )? )? ) ;
+	// projet.g:133:1: affouappel : ident ( ':=' expression | ( effixes ( effmods )? )? ) ;
 	public final void affouappel() throws RecognitionException {
 		try {
-			// ./projet.g:134:3: ( ident ( ':=' expression | ( effixes ( effmods )? )? ) )
-			// ./projet.g:134:5: ident ( ':=' expression | ( effixes ( effmods )? )? )
+			// projet.g:134:3: ( ident ( ':=' expression | ( effixes ( effmods )? )? ) )
+			// projet.g:134:5: ident ( ':=' expression | ( effixes ( effmods )? )? )
 			{
 			pushFollow(FOLLOW_ident_in_affouappel881);
 			ident();
 			state._fsp--;
 
-			// ./projet.g:134:12: ( ':=' expression | ( effixes ( effmods )? )? )
+			// projet.g:134:12: ( ':=' expression | ( effixes ( effmods )? )? )
 			int alt36=2;
 			int LA36_0 = input.LA(1);
 			if ( (LA36_0==16) ) {
@@ -1679,19 +1679,21 @@ public class projetParser extends Parser {
 
 			switch (alt36) {
 				case 1 :
-					// ./projet.g:134:17: ':=' expression
+					// projet.g:134:14: ':=' expression
 					{
-					match(input,16,FOLLOW_16_in_affouappel889); 
-					pushFollow(FOLLOW_expression_in_affouappel891);
+					PtGen.pt(10);
+					match(input,16,FOLLOW_16_in_affouappel888); 
+					pushFollow(FOLLOW_expression_in_affouappel890);
 					expression();
 					state._fsp--;
 
+					PtGen.pt(11);
 					}
 					break;
 				case 2 :
-					// ./projet.g:135:17: ( effixes ( effmods )? )?
+					// projet.g:135:17: ( effixes ( effmods )? )?
 					{
-					// ./projet.g:135:17: ( effixes ( effmods )? )?
+					// projet.g:135:17: ( effixes ( effmods )? )?
 					int alt35=2;
 					int LA35_0 = input.LA(1);
 					if ( (LA35_0==9) ) {
@@ -1699,13 +1701,13 @@ public class projetParser extends Parser {
 					}
 					switch (alt35) {
 						case 1 :
-							// ./projet.g:135:18: effixes ( effmods )?
+							// projet.g:135:18: effixes ( effmods )?
 							{
 							pushFollow(FOLLOW_effixes_in_affouappel911);
 							effixes();
 							state._fsp--;
 
-							// ./projet.g:135:26: ( effmods )?
+							// projet.g:135:26: ( effmods )?
 							int alt34=2;
 							int LA34_0 = input.LA(1);
 							if ( (LA34_0==9) ) {
@@ -1713,7 +1715,7 @@ public class projetParser extends Parser {
 							}
 							switch (alt34) {
 								case 1 :
-									// ./projet.g:135:27: effmods
+									// projet.g:135:27: effmods
 									{
 									pushFollow(FOLLOW_effmods_in_affouappel914);
 									effmods();
@@ -1748,14 +1750,14 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "effixes"
-	// ./projet.g:139:1: effixes : '(' ( expression ( ',' expression )* )? ')' ;
+	// projet.g:139:1: effixes : '(' ( expression ( ',' expression )* )? ')' ;
 	public final void effixes() throws RecognitionException {
 		try {
-			// ./projet.g:139:9: ( '(' ( expression ( ',' expression )* )? ')' )
-			// ./projet.g:139:11: '(' ( expression ( ',' expression )* )? ')'
+			// projet.g:139:9: ( '(' ( expression ( ',' expression )* )? ')' )
+			// projet.g:139:11: '(' ( expression ( ',' expression )* )? ')'
 			{
 			match(input,9,FOLLOW_9_in_effixes946); 
-			// ./projet.g:139:15: ( expression ( ',' expression )* )?
+			// projet.g:139:15: ( expression ( ',' expression )* )?
 			int alt38=2;
 			int LA38_0 = input.LA(1);
 			if ( ((LA38_0 >= ID && LA38_0 <= INT)||LA38_0==9||LA38_0==12||LA38_0==14||LA38_0==37||LA38_0==45||LA38_0==54) ) {
@@ -1763,13 +1765,13 @@ public class projetParser extends Parser {
 			}
 			switch (alt38) {
 				case 1 :
-					// ./projet.g:139:16: expression ( ',' expression )*
+					// projet.g:139:16: expression ( ',' expression )*
 					{
 					pushFollow(FOLLOW_expression_in_effixes949);
 					expression();
 					state._fsp--;
 
-					// ./projet.g:139:28: ( ',' expression )*
+					// projet.g:139:28: ( ',' expression )*
 					loop37:
 					while (true) {
 						int alt37=2;
@@ -1780,7 +1782,7 @@ public class projetParser extends Parser {
 
 						switch (alt37) {
 						case 1 :
-							// ./projet.g:139:29: ',' expression
+							// projet.g:139:29: ',' expression
 							{
 							match(input,13,FOLLOW_13_in_effixes953); 
 							pushFollow(FOLLOW_expression_in_effixes955);
@@ -1815,14 +1817,14 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "effmods"
-	// ./projet.g:142:1: effmods : '(' ( ident ( ',' ident )* )? ')' ;
+	// projet.g:142:1: effmods : '(' ( ident ( ',' ident )* )? ')' ;
 	public final void effmods() throws RecognitionException {
 		try {
-			// ./projet.g:142:9: ( '(' ( ident ( ',' ident )* )? ')' )
-			// ./projet.g:142:10: '(' ( ident ( ',' ident )* )? ')'
+			// projet.g:142:9: ( '(' ( ident ( ',' ident )* )? ')' )
+			// projet.g:142:10: '(' ( ident ( ',' ident )* )? ')'
 			{
 			match(input,9,FOLLOW_9_in_effmods975); 
-			// ./projet.g:142:14: ( ident ( ',' ident )* )?
+			// projet.g:142:14: ( ident ( ',' ident )* )?
 			int alt40=2;
 			int LA40_0 = input.LA(1);
 			if ( (LA40_0==ID) ) {
@@ -1830,13 +1832,13 @@ public class projetParser extends Parser {
 			}
 			switch (alt40) {
 				case 1 :
-					// ./projet.g:142:15: ident ( ',' ident )*
+					// projet.g:142:15: ident ( ',' ident )*
 					{
 					pushFollow(FOLLOW_ident_in_effmods978);
 					ident();
 					state._fsp--;
 
-					// ./projet.g:142:22: ( ',' ident )*
+					// projet.g:142:22: ( ',' ident )*
 					loop39:
 					while (true) {
 						int alt39=2;
@@ -1847,7 +1849,7 @@ public class projetParser extends Parser {
 
 						switch (alt39) {
 						case 1 :
-							// ./projet.g:142:23: ',' ident
+							// projet.g:142:23: ',' ident
 							{
 							match(input,13,FOLLOW_13_in_effmods982); 
 							pushFollow(FOLLOW_ident_in_effmods984);
@@ -1882,14 +1884,14 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "expression"
-	// ./projet.g:145:1: expression : ( exp1 ) ( 'ou' exp1 )* ;
+	// projet.g:145:1: expression : ( exp1 ) ( 'ou' exp1 )* ;
 	public final void expression() throws RecognitionException {
 		try {
-			// ./projet.g:145:11: ( ( exp1 ) ( 'ou' exp1 )* )
-			// ./projet.g:145:13: ( exp1 ) ( 'ou' exp1 )*
+			// projet.g:145:11: ( ( exp1 ) ( 'ou' exp1 )* )
+			// projet.g:145:13: ( exp1 ) ( 'ou' exp1 )*
 			{
-			// ./projet.g:145:13: ( exp1 )
-			// ./projet.g:145:14: exp1
+			// projet.g:145:13: ( exp1 )
+			// projet.g:145:14: exp1
 			{
 			pushFollow(FOLLOW_exp1_in_expression1006);
 			exp1();
@@ -1897,7 +1899,7 @@ public class projetParser extends Parser {
 
 			}
 
-			// ./projet.g:145:20: ( 'ou' exp1 )*
+			// projet.g:145:20: ( 'ou' exp1 )*
 			loop41:
 			while (true) {
 				int alt41=2;
@@ -1908,13 +1910,14 @@ public class projetParser extends Parser {
 
 				switch (alt41) {
 				case 1 :
-					// ./projet.g:145:21: 'ou' exp1
+					// projet.g:145:21: 'ou' exp1
 					{
 					match(input,46,FOLLOW_46_in_expression1010); 
 					pushFollow(FOLLOW_exp1_in_expression1013);
 					exp1();
 					state._fsp--;
 
+					PtGen.pt(21);
 					}
 					break;
 
@@ -1937,17 +1940,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "exp1"
-	// ./projet.g:148:1: exp1 : exp2 ( 'et' exp2 )* ;
+	// projet.g:148:1: exp1 : exp2 ( 'et' exp2 )* ;
 	public final void exp1() throws RecognitionException {
 		try {
-			// ./projet.g:148:7: ( exp2 ( 'et' exp2 )* )
-			// ./projet.g:148:9: exp2 ( 'et' exp2 )*
+			// projet.g:148:7: ( exp2 ( 'et' exp2 )* )
+			// projet.g:148:9: exp2 ( 'et' exp2 )*
 			{
-			pushFollow(FOLLOW_exp2_in_exp11031);
+			pushFollow(FOLLOW_exp2_in_exp11032);
 			exp2();
 			state._fsp--;
 
-			// ./projet.g:148:14: ( 'et' exp2 )*
+			// projet.g:148:14: ( 'et' exp2 )*
 			loop42:
 			while (true) {
 				int alt42=2;
@@ -1958,13 +1961,14 @@ public class projetParser extends Parser {
 
 				switch (alt42) {
 				case 1 :
-					// ./projet.g:148:15: 'et' exp2
+					// projet.g:148:15: 'et' exp2
 					{
-					match(input,34,FOLLOW_34_in_exp11034); 
-					pushFollow(FOLLOW_exp2_in_exp11037);
+					match(input,34,FOLLOW_34_in_exp11035); 
+					pushFollow(FOLLOW_exp2_in_exp11038);
 					exp2();
 					state._fsp--;
 
+					PtGen.pt(22);
 					}
 					break;
 
@@ -1987,10 +1991,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "exp2"
-	// ./projet.g:151:1: exp2 : ( 'non' exp2 | exp3 );
+	// projet.g:151:1: exp2 : ( 'non' exp2 | exp3 );
 	public final void exp2() throws RecognitionException {
 		try {
-			// ./projet.g:151:7: ( 'non' exp2 | exp3 )
+			// projet.g:151:7: ( 'non' exp2 | exp3 )
 			int alt43=2;
 			int LA43_0 = input.LA(1);
 			if ( (LA43_0==45) ) {
@@ -2008,19 +2012,20 @@ public class projetParser extends Parser {
 
 			switch (alt43) {
 				case 1 :
-					// ./projet.g:151:9: 'non' exp2
+					// projet.g:151:9: 'non' exp2
 					{
-					match(input,45,FOLLOW_45_in_exp21055); 
-					pushFollow(FOLLOW_exp2_in_exp21057);
+					match(input,45,FOLLOW_45_in_exp21057); 
+					pushFollow(FOLLOW_exp2_in_exp21059);
 					exp2();
 					state._fsp--;
 
+					PtGen.pt(23);
 					}
 					break;
 				case 2 :
-					// ./projet.g:152:5: exp3
+					// projet.g:152:5: exp3
 					{
-					pushFollow(FOLLOW_exp3_in_exp21064);
+					pushFollow(FOLLOW_exp3_in_exp21069);
 					exp3();
 					state._fsp--;
 
@@ -2040,17 +2045,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "exp3"
-	// ./projet.g:155:1: exp3 : exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )? ;
+	// projet.g:155:1: exp3 : exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )? ;
 	public final void exp3() throws RecognitionException {
 		try {
-			// ./projet.g:155:7: ( exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )? )
-			// ./projet.g:155:9: exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )?
+			// projet.g:155:7: ( exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )? )
+			// projet.g:155:9: exp4 ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )?
 			{
-			pushFollow(FOLLOW_exp4_in_exp31080);
+			pushFollow(FOLLOW_exp4_in_exp31085);
 			exp4();
 			state._fsp--;
 
-			// ./projet.g:156:3: ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )?
+			// projet.g:156:3: ( '=' exp4 | '<>' exp4 | '>' exp4 | '>=' exp4 | '<' exp4 | '<=' exp4 )?
 			int alt44=7;
 			switch ( input.LA(1) ) {
 				case 21:
@@ -2086,63 +2091,69 @@ public class projetParser extends Parser {
 			}
 			switch (alt44) {
 				case 1 :
-					// ./projet.g:156:5: '=' exp4
+					// projet.g:156:5: '=' exp4
 					{
-					match(input,21,FOLLOW_21_in_exp31087); 
-					pushFollow(FOLLOW_exp4_in_exp31091);
+					match(input,21,FOLLOW_21_in_exp31092); 
+					pushFollow(FOLLOW_exp4_in_exp31096);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(24);
 					}
 					break;
 				case 2 :
-					// ./projet.g:157:5: '<>' exp4
+					// projet.g:157:5: '<>' exp4
 					{
-					match(input,20,FOLLOW_20_in_exp31098); 
-					pushFollow(FOLLOW_exp4_in_exp31101);
+					match(input,20,FOLLOW_20_in_exp31104); 
+					pushFollow(FOLLOW_exp4_in_exp31107);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(25);
 					}
 					break;
 				case 3 :
-					// ./projet.g:158:5: '>' exp4
+					// projet.g:158:5: '>' exp4
 					{
-					match(input,22,FOLLOW_22_in_exp31108); 
-					pushFollow(FOLLOW_exp4_in_exp31112);
+					match(input,22,FOLLOW_22_in_exp31115); 
+					pushFollow(FOLLOW_exp4_in_exp31119);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(26);
 					}
 					break;
 				case 4 :
-					// ./projet.g:159:5: '>=' exp4
+					// projet.g:159:5: '>=' exp4
 					{
-					match(input,23,FOLLOW_23_in_exp31119); 
-					pushFollow(FOLLOW_exp4_in_exp31122);
+					match(input,23,FOLLOW_23_in_exp31127); 
+					pushFollow(FOLLOW_exp4_in_exp31130);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(27);
 					}
 					break;
 				case 5 :
-					// ./projet.g:160:5: '<' exp4
+					// projet.g:160:5: '<' exp4
 					{
-					match(input,18,FOLLOW_18_in_exp31129); 
-					pushFollow(FOLLOW_exp4_in_exp31133);
+					match(input,18,FOLLOW_18_in_exp31138); 
+					pushFollow(FOLLOW_exp4_in_exp31142);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(28);
 					}
 					break;
 				case 6 :
-					// ./projet.g:161:5: '<=' exp4
+					// projet.g:161:5: '<=' exp4
 					{
-					match(input,19,FOLLOW_19_in_exp31140); 
-					pushFollow(FOLLOW_exp4_in_exp31143);
+					match(input,19,FOLLOW_19_in_exp31150); 
+					pushFollow(FOLLOW_exp4_in_exp31153);
 					exp4();
 					state._fsp--;
 
+					PtGen.pt(29);
 					}
 					break;
 
@@ -2162,17 +2173,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "exp4"
-	// ./projet.g:165:1: exp4 : exp5 ( '+' exp5 | '-' exp5 )* ;
+	// projet.g:165:1: exp4 : exp5 ( '+' exp5 | '-' exp5 )* ;
 	public final void exp4() throws RecognitionException {
 		try {
-			// ./projet.g:165:7: ( exp5 ( '+' exp5 | '-' exp5 )* )
-			// ./projet.g:165:9: exp5 ( '+' exp5 | '-' exp5 )*
+			// projet.g:165:7: ( exp5 ( '+' exp5 | '-' exp5 )* )
+			// projet.g:165:9: exp5 ( '+' exp5 | '-' exp5 )*
 			{
-			pushFollow(FOLLOW_exp5_in_exp41165);
+			pushFollow(FOLLOW_exp5_in_exp41175);
 			exp5();
 			state._fsp--;
 
-			// ./projet.g:166:9: ( '+' exp5 | '-' exp5 )*
+			// projet.g:166:9: ( '+' exp5 | '-' exp5 )*
 			loop45:
 			while (true) {
 				int alt45=3;
@@ -2186,23 +2197,25 @@ public class projetParser extends Parser {
 
 				switch (alt45) {
 				case 1 :
-					// ./projet.g:166:10: '+' exp5
+					// projet.g:166:10: '+' exp5
 					{
-					match(input,12,FOLLOW_12_in_exp41177); 
-					pushFollow(FOLLOW_exp5_in_exp41180);
+					match(input,12,FOLLOW_12_in_exp41187); 
+					pushFollow(FOLLOW_exp5_in_exp41190);
 					exp5();
 					state._fsp--;
 
+					PtGen.pt(30);
 					}
 					break;
 				case 2 :
-					// ./projet.g:167:10: '-' exp5
+					// projet.g:167:10: '-' exp5
 					{
-					match(input,14,FOLLOW_14_in_exp41192); 
-					pushFollow(FOLLOW_exp5_in_exp41195);
+					match(input,14,FOLLOW_14_in_exp41203); 
+					pushFollow(FOLLOW_exp5_in_exp41206);
 					exp5();
 					state._fsp--;
 
+					PtGen.pt(31);
 					}
 					break;
 
@@ -2225,17 +2238,17 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "exp5"
-	// ./projet.g:171:1: exp5 : primaire ( '*' primaire | 'div' primaire )* ;
+	// projet.g:171:1: exp5 : primaire ( '*' primaire | 'div' primaire )* ;
 	public final void exp5() throws RecognitionException {
 		try {
-			// ./projet.g:171:7: ( primaire ( '*' primaire | 'div' primaire )* )
-			// ./projet.g:171:9: primaire ( '*' primaire | 'div' primaire )*
+			// projet.g:171:7: ( primaire ( '*' primaire | 'div' primaire )* )
+			// projet.g:171:9: primaire ( '*' primaire | 'div' primaire )*
 			{
-			pushFollow(FOLLOW_primaire_in_exp51221);
+			pushFollow(FOLLOW_primaire_in_exp51233);
 			primaire();
 			state._fsp--;
 
-			// ./projet.g:172:9: ( '*' primaire | 'div' primaire )*
+			// projet.g:172:9: ( '*' primaire | 'div' primaire )*
 			loop46:
 			while (true) {
 				int alt46=3;
@@ -2249,23 +2262,25 @@ public class projetParser extends Parser {
 
 				switch (alt46) {
 				case 1 :
-					// ./projet.g:172:14: '*' primaire
+					// projet.g:172:14: '*' primaire
 					{
-					match(input,11,FOLLOW_11_in_exp51237); 
-					pushFollow(FOLLOW_primaire_in_exp51241);
+					match(input,11,FOLLOW_11_in_exp51249); 
+					pushFollow(FOLLOW_primaire_in_exp51253);
 					primaire();
 					state._fsp--;
 
+					PtGen.pt(32);
 					}
 					break;
 				case 2 :
-					// ./projet.g:173:13: 'div' primaire
+					// projet.g:173:13: 'div' primaire
 					{
-					match(input,31,FOLLOW_31_in_exp51256); 
-					pushFollow(FOLLOW_primaire_in_exp51259);
+					match(input,31,FOLLOW_31_in_exp51269); 
+					pushFollow(FOLLOW_primaire_in_exp51272);
 					primaire();
 					state._fsp--;
 
+					PtGen.pt(33);
 					}
 					break;
 
@@ -2288,10 +2303,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "primaire"
-	// ./projet.g:177:1: primaire : ( valeur | ident | '(' expression ')' );
+	// projet.g:177:1: primaire : ( valeur | ident | '(' expression ')' );
 	public final void primaire() throws RecognitionException {
 		try {
-			// ./projet.g:177:9: ( valeur | ident | '(' expression ')' )
+			// projet.g:177:9: ( valeur | ident | '(' expression ')' )
 			int alt47=3;
 			switch ( input.LA(1) ) {
 			case INT:
@@ -2320,32 +2335,34 @@ public class projetParser extends Parser {
 			}
 			switch (alt47) {
 				case 1 :
-					// ./projet.g:177:11: valeur
+					// projet.g:177:11: valeur
 					{
-					pushFollow(FOLLOW_valeur_in_primaire1283);
+					pushFollow(FOLLOW_valeur_in_primaire1297);
 					valeur();
 					state._fsp--;
 
+					PtGen.pt(34);
 					}
 					break;
 				case 2 :
-					// ./projet.g:178:5: ident
+					// projet.g:178:5: ident
 					{
-					pushFollow(FOLLOW_ident_in_primaire1290);
+					pushFollow(FOLLOW_ident_in_primaire1305);
 					ident();
 					state._fsp--;
 
+					PtGen.pt(35);
 					}
 					break;
 				case 3 :
-					// ./projet.g:179:5: '(' expression ')'
+					// projet.g:179:5: '(' expression ')'
 					{
-					match(input,9,FOLLOW_9_in_primaire1298); 
-					pushFollow(FOLLOW_expression_in_primaire1300);
+					match(input,9,FOLLOW_9_in_primaire1313); 
+					pushFollow(FOLLOW_expression_in_primaire1315);
 					expression();
 					state._fsp--;
 
-					match(input,10,FOLLOW_10_in_primaire1302); 
+					match(input,10,FOLLOW_10_in_primaire1317); 
 					}
 					break;
 
@@ -2362,10 +2379,10 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "valeur"
-	// ./projet.g:182:1: valeur : ( nbentier | '+' nbentier | '-' nbentier | 'vrai' | 'faux' );
+	// projet.g:182:1: valeur : ( nbentier | '+' nbentier | '-' nbentier | 'vrai' | 'faux' );
 	public final void valeur() throws RecognitionException {
 		try {
-			// ./projet.g:182:9: ( nbentier | '+' nbentier | '-' nbentier | 'vrai' | 'faux' )
+			// projet.g:182:9: ( nbentier | '+' nbentier | '-' nbentier | 'vrai' | 'faux' )
 			int alt48=5;
 			switch ( input.LA(1) ) {
 			case INT:
@@ -2400,9 +2417,9 @@ public class projetParser extends Parser {
 			}
 			switch (alt48) {
 				case 1 :
-					// ./projet.g:182:11: nbentier
+					// projet.g:182:11: nbentier
 					{
-					pushFollow(FOLLOW_nbentier_in_valeur1316);
+					pushFollow(FOLLOW_nbentier_in_valeur1331);
 					nbentier();
 					state._fsp--;
 
@@ -2410,10 +2427,10 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 2 :
-					// ./projet.g:183:5: '+' nbentier
+					// projet.g:183:5: '+' nbentier
 					{
-					match(input,12,FOLLOW_12_in_valeur1324); 
-					pushFollow(FOLLOW_nbentier_in_valeur1326);
+					match(input,12,FOLLOW_12_in_valeur1339); 
+					pushFollow(FOLLOW_nbentier_in_valeur1341);
 					nbentier();
 					state._fsp--;
 
@@ -2421,10 +2438,10 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 3 :
-					// ./projet.g:184:5: '-' nbentier
+					// projet.g:184:5: '-' nbentier
 					{
-					match(input,14,FOLLOW_14_in_valeur1334); 
-					pushFollow(FOLLOW_nbentier_in_valeur1336);
+					match(input,14,FOLLOW_14_in_valeur1349); 
+					pushFollow(FOLLOW_nbentier_in_valeur1351);
 					nbentier();
 					state._fsp--;
 
@@ -2432,16 +2449,16 @@ public class projetParser extends Parser {
 					}
 					break;
 				case 4 :
-					// ./projet.g:185:5: 'vrai'
+					// projet.g:185:5: 'vrai'
 					{
-					match(input,54,FOLLOW_54_in_valeur1344); 
+					match(input,54,FOLLOW_54_in_valeur1359); 
 					PtGen.pt(5);PtGen.pt(8);
 					}
 					break;
 				case 5 :
-					// ./projet.g:186:5: 'faux'
+					// projet.g:186:5: 'faux'
 					{
-					match(input,37,FOLLOW_37_in_valeur1352); 
+					match(input,37,FOLLOW_37_in_valeur1367); 
 					PtGen.pt(5);PtGen.pt(9);
 					}
 					break;
@@ -2459,15 +2476,15 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "nbentier"
-	// ./projet.g:196:1: nbentier : INT ;
+	// projet.g:196:1: nbentier : INT ;
 	public final void nbentier() throws RecognitionException {
 		Token INT1=null;
 
 		try {
-			// ./projet.g:196:11: ( INT )
-			// ./projet.g:196:15: INT
+			// projet.g:196:11: ( INT )
+			// projet.g:196:15: INT
 			{
-			INT1=(Token)match(input,INT,FOLLOW_INT_in_nbentier1382); 
+			INT1=(Token)match(input,INT,FOLLOW_INT_in_nbentier1397); 
 			 UtilLex.valNb = Integer.parseInt((INT1!=null?INT1.getText():null));
 			}
 
@@ -2483,15 +2500,15 @@ public class projetParser extends Parser {
 
 
 	// $ANTLR start "ident"
-	// ./projet.g:198:1: ident : ID ;
+	// projet.g:198:1: ident : ID ;
 	public final void ident() throws RecognitionException {
 		Token ID2=null;
 
 		try {
-			// ./projet.g:198:7: ( ID )
-			// ./projet.g:198:9: ID
+			// projet.g:198:7: ( ID )
+			// projet.g:198:9: ID
 			{
-			ID2=(Token)match(input,ID,FOLLOW_ID_in_ident1393); 
+			ID2=(Token)match(input,ID,FOLLOW_ID_in_ident1408); 
 			 UtilLex.traiterId((ID2!=null?ID2.getText():null), (ID2!=null?ID2.getLine():0)); 
 			}
 
@@ -2640,8 +2657,8 @@ public class projetParser extends Parser {
 	public static final BitSet FOLLOW_expression_in_ecriture859 = new BitSet(new long[]{0x0000000000002400L});
 	public static final BitSet FOLLOW_10_in_ecriture865 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ident_in_affouappel881 = new BitSet(new long[]{0x0000000000010202L});
-	public static final BitSet FOLLOW_16_in_affouappel889 = new BitSet(new long[]{0x0040202000005260L});
-	public static final BitSet FOLLOW_expression_in_affouappel891 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_16_in_affouappel888 = new BitSet(new long[]{0x0040202000005260L});
+	public static final BitSet FOLLOW_expression_in_affouappel890 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_effixes_in_affouappel911 = new BitSet(new long[]{0x0000000000000202L});
 	public static final BitSet FOLLOW_effmods_in_affouappel914 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_9_in_effixes946 = new BitSet(new long[]{0x0040202000005660L});
@@ -2657,47 +2674,47 @@ public class projetParser extends Parser {
 	public static final BitSet FOLLOW_exp1_in_expression1006 = new BitSet(new long[]{0x0000400000000002L});
 	public static final BitSet FOLLOW_46_in_expression1010 = new BitSet(new long[]{0x0040202000005260L});
 	public static final BitSet FOLLOW_exp1_in_expression1013 = new BitSet(new long[]{0x0000400000000002L});
-	public static final BitSet FOLLOW_exp2_in_exp11031 = new BitSet(new long[]{0x0000000400000002L});
-	public static final BitSet FOLLOW_34_in_exp11034 = new BitSet(new long[]{0x0040202000005260L});
-	public static final BitSet FOLLOW_exp2_in_exp11037 = new BitSet(new long[]{0x0000000400000002L});
-	public static final BitSet FOLLOW_45_in_exp21055 = new BitSet(new long[]{0x0040202000005260L});
-	public static final BitSet FOLLOW_exp2_in_exp21057 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_exp3_in_exp21064 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_exp4_in_exp31080 = new BitSet(new long[]{0x0000000000FC0002L});
-	public static final BitSet FOLLOW_21_in_exp31087 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31091 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_20_in_exp31098 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31101 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_22_in_exp31108 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31112 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_23_in_exp31119 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31122 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_18_in_exp31129 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31133 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_19_in_exp31140 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp4_in_exp31143 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_exp5_in_exp41165 = new BitSet(new long[]{0x0000000000005002L});
-	public static final BitSet FOLLOW_12_in_exp41177 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp5_in_exp41180 = new BitSet(new long[]{0x0000000000005002L});
-	public static final BitSet FOLLOW_14_in_exp41192 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_exp5_in_exp41195 = new BitSet(new long[]{0x0000000000005002L});
-	public static final BitSet FOLLOW_primaire_in_exp51221 = new BitSet(new long[]{0x0000000080000802L});
-	public static final BitSet FOLLOW_11_in_exp51237 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_primaire_in_exp51241 = new BitSet(new long[]{0x0000000080000802L});
-	public static final BitSet FOLLOW_31_in_exp51256 = new BitSet(new long[]{0x0040002000005260L});
-	public static final BitSet FOLLOW_primaire_in_exp51259 = new BitSet(new long[]{0x0000000080000802L});
-	public static final BitSet FOLLOW_valeur_in_primaire1283 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ident_in_primaire1290 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_9_in_primaire1298 = new BitSet(new long[]{0x0040202000005260L});
-	public static final BitSet FOLLOW_expression_in_primaire1300 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_10_in_primaire1302 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_nbentier_in_valeur1316 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_12_in_valeur1324 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_nbentier_in_valeur1326 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_14_in_valeur1334 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_nbentier_in_valeur1336 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_54_in_valeur1344 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_37_in_valeur1352 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_INT_in_nbentier1382 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_ident1393 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_exp2_in_exp11032 = new BitSet(new long[]{0x0000000400000002L});
+	public static final BitSet FOLLOW_34_in_exp11035 = new BitSet(new long[]{0x0040202000005260L});
+	public static final BitSet FOLLOW_exp2_in_exp11038 = new BitSet(new long[]{0x0000000400000002L});
+	public static final BitSet FOLLOW_45_in_exp21057 = new BitSet(new long[]{0x0040202000005260L});
+	public static final BitSet FOLLOW_exp2_in_exp21059 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_exp3_in_exp21069 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_exp4_in_exp31085 = new BitSet(new long[]{0x0000000000FC0002L});
+	public static final BitSet FOLLOW_21_in_exp31092 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31096 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_20_in_exp31104 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31107 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_22_in_exp31115 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31119 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_23_in_exp31127 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31130 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_18_in_exp31138 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31142 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_19_in_exp31150 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp4_in_exp31153 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_exp5_in_exp41175 = new BitSet(new long[]{0x0000000000005002L});
+	public static final BitSet FOLLOW_12_in_exp41187 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp5_in_exp41190 = new BitSet(new long[]{0x0000000000005002L});
+	public static final BitSet FOLLOW_14_in_exp41203 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_exp5_in_exp41206 = new BitSet(new long[]{0x0000000000005002L});
+	public static final BitSet FOLLOW_primaire_in_exp51233 = new BitSet(new long[]{0x0000000080000802L});
+	public static final BitSet FOLLOW_11_in_exp51249 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_primaire_in_exp51253 = new BitSet(new long[]{0x0000000080000802L});
+	public static final BitSet FOLLOW_31_in_exp51269 = new BitSet(new long[]{0x0040002000005260L});
+	public static final BitSet FOLLOW_primaire_in_exp51272 = new BitSet(new long[]{0x0000000080000802L});
+	public static final BitSet FOLLOW_valeur_in_primaire1297 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ident_in_primaire1305 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_9_in_primaire1313 = new BitSet(new long[]{0x0040202000005260L});
+	public static final BitSet FOLLOW_expression_in_primaire1315 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_primaire1317 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_nbentier_in_valeur1331 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_12_in_valeur1339 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_nbentier_in_valeur1341 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_14_in_valeur1349 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_nbentier_in_valeur1351 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_54_in_valeur1359 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_37_in_valeur1367 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_INT_in_nbentier1397 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_ident1408 = new BitSet(new long[]{0x0000000000000002L});
 }

@@ -401,6 +401,8 @@ public class PtGen {
 			
 			case 255:
 				po.produire(ARRET);
+				po.constObj();
+				po.constGen();
 				afftabSymb();
 			break;
 			

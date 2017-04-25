@@ -6,7 +6,7 @@ var ent i,j;
 
 debut
 
-	i:= 2;
+  i:= 2;
   j:= i;
   b1:= oui;
 fin
