@@ -442,7 +442,30 @@ public class PtGen {
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 			break;
 			
-			case 51:
+			/*
+			 * Boucle while... do... done
+			 */
+			case 51://Enregistrement de l'indice de pile pour pouvoir retourner en début de boucle
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 52://Production de la condition de boucle
+				po.produire(BSIFAUX);
+				po.produire(0);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 53://Retour en début de boucle et correction des branchements
+				po.produire(BINCOND);
+				//Positionne le point de branchement du "tant que" quand il est mis à faux
+				po.modifier(pileRep.depiler(), po.getIpo()+2);
+				po.produire(pileRep.depiler()+1);
+			break;
+			
+			/*
+			 * 
+			 */
+			case 61:
 				
 			break;
 			
