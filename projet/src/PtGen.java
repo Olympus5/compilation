@@ -463,10 +463,44 @@ public class PtGen {
 			break;
 			
 			/*
-			 * 
+			 * Conditionnel de type switch
 			 */
 			case 61:
+				pileRep.empiler(0);
+			break;
+			
+			case 62:
+				po.produire(BSIFAUX);
+				po.produire(0);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 63:
+				po.produire(BINCOND);
+				po.modifier(pileRep.depiler(), po.getIpo()+2);
+				po.produire(pileRep.depiler());
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 64:
+				po.produire(BINCOND);
+				po.produire(0);
+				po.modifier(pileRep.depiler(), po.getIpo()+1);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 65:
+				po.modifier(pileRep.depiler(), po.getIpo()+1);
+				int tmp = pileRep.depiler();
+				int valeurBINCOND;
 				
+				while(tmp > 0) {
+					valeurBINCOND = po.getElt(tmp);
+					po.modifier(tmp, po.getIpo()+1);
+					tmp = valeurBINCOND;
+				}
+				
+				po.modifier(tmp, po.getIpo()+1);
 			break;
 			
 			case 255:
