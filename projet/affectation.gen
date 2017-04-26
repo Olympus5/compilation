@@ -1,31 +1,30 @@
 FICHIER affectation.gen : 
 
-   1  rýserver        5
-   3  empiler         2
-   5  affecterg       0
-   7  contenug        0
-   9  affecterg       1
-  11  empiler         1
-  13  affecterg       2
-  15  lirebool  
-  16  affecterg       3
-  18  contenug        0
-  20  contenug        1
-  22  inf       
-  23  ecrbool   
-  24  empiler         1
-  26  empiler         0
-  28  ou        
-  29  bsifaux        35
-  31  empiler         1
-  33  affecterg       2
-  35  empiler         1
-  37  empiler         0
-  39  et        
-  40  bsifaux        48
-  42  empiler         1
-  44  affecterg       3
-  46  bincond        52
-  48  empiler         0
-  50  affecterg       3
-  52  arrýt     
+   1  empiler         2
+   3  affecterg       5
+   5  contenug        5
+   7  affecterg       6
+   9  empiler         1
+  11  affecterg       7
+  13  lirebool  
+  14  affecterg       8
+  16  contenug        5
+  18  contenug        6
+  20  inf       
+  21  ecrbool   
+  22  empiler         1
+  24  empiler         0
+  26  ou        
+  27  bsifaux        33
+  29  empiler         1
+  31  affecterg       7
+  33  empiler         1
+  35  empiler         0
+  37  et        
+  38  bsifaux        46
+  40  empiler         1
+  42  affecterg       8
+  44  bincond        50
+  46  empiler         0
+  48  affecterg       8
+  50  arrýt     

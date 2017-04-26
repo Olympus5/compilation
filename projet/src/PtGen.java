@@ -119,6 +119,9 @@ public class PtGen {
 	//Variable complémentaire
 	private static int nombreDeVariableGlobale;
 	private static int adresseIdentAffectation;
+	private static int nombreDeParametre;
+	private static int nombreDeVariableLocale;
+	private static int adresseIdentAppel;
 	
 	// utilitaire de recherche de l'ident courant (ayant pour code UtilLex.numId) dans tabSymb
 	// rend en r�sultat l'indice de cet ident dans tabSymb (O si absence)
@@ -189,6 +192,9 @@ public class PtGen {
 		//Initialisation des variable personnels
 		nombreDeVariableGlobale = 0;
 		adresseIdentAffectation = 0;
+		nombreDeParametre = 0;
+		nombreDeVariableLocale = 0;
+		adresseIdentAppel = 0;
 	} // initialisations
 
 	// code des points de g�n�ration A COMPLETER
@@ -209,6 +215,7 @@ public class PtGen {
 			 * Conditionnel if..then..else.. -> 41-50
 			 * Boucle while..do..done -> 51-60
 			 * Conditionnel switch -> 61-70
+			 * Procédure -> 71-90
 			 */
 			
 			
@@ -217,30 +224,45 @@ public class PtGen {
 			 * Declarations des variables, constantes, ... / Affectations de valeur / Lecture et Ecriture
 			 */
 			case 1://Compteurs de variables et ajout de variables dans la table des symboles
-				int adresseVariableGlobale = presentIdent(1);
+				int adresseVariable;
 				
-				if(adresseVariableGlobale == 0) {
-					placeIdent(UtilLex.numId, VARGLOBALE, tCour, nombreDeVariableGlobale);
-					nombreDeVariableGlobale++;
-				} else {
-					UtilLex.messErr("Variable déjà déclarée");
+				if(bc <= 1) {//Déclaration de variables globales
+					adresseVariable = presentIdent(1);
+					
+					if(adresseVariable == 0) {
+						placeIdent(UtilLex.numId, VARGLOBALE, tCour, nombreDeVariableGlobale);
+						nombreDeVariableGlobale++;
+					} else {
+						UtilLex.messErr("Variable globale déjà déclarée (1)");
+					}
+				} else {//Déclaration de variables locales
+					adresseVariable = presentIdent(bc);
+					
+					if(adresseVariable == 0) {
+						placeIdent(UtilLex.numId, VARLOCALE, tCour, nombreDeParametre+nombreDeVariableLocale+2);//+1 et non + 2 car les adresses commence à zéro
+						nombreDeVariableLocale++;
+					} else {
+						UtilLex.messErr("Variable locale déjà déclarée (1)");
+					}
 				}
 			break;
 			
 			case 2://Declaration de l'instructon pour réserver de la place en pile pour les vars
 				if(nombreDeVariableGlobale > 0) {
 					po.produire(RESERVER);
-					po.produire(nombreDeVariableGlobale);
+					if(bc <= 1) po.produire(nombreDeVariableGlobale);
+					else po.produire(nombreDeVariableLocale);
 				}
 			break;
 			
 			case 3://Ajout des constantes dans la table des symboles
-				int adresseConstante = presentIdent(1);
+				int adresseConstanteGlobale = presentIdent(1);
+				int adresseConstanteLocale = presentIdent(bc);
 				
-				if(adresseConstante == 0) {
+				if(adresseConstanteGlobale == 0 || adresseConstanteLocale == 0) {
 					placeIdent(UtilLex.numId, CONSTANTE, tCour, vCour);
 				} else {
-					UtilLex.messErr("Constante déjà déclarée");
+					UtilLex.messErr("Constante déjà déclarée (3)");
 				}
 			break;
 			
@@ -272,13 +294,15 @@ public class PtGen {
 				adresseIdentAffectation = presentIdent(1);
 				
 				if(adresseIdentAffectation != 0) {
-					if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
+					if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE
+					|| tabSymb[adresseIdentAffectation].categorie == VARLOCALE
+					|| tabSymb[adresseIdentAffectation].categorie == PARAMMOD) {
 						tCour = tabSymb[adresseIdentAffectation].type;
 					} else {
-						UtilLex.messErr("Catégorie non autorisé pour l'affectation");
+						UtilLex.messErr("Catégorie non autorisé pour l'affectation (10)");
 					}
 				} else {
-					UtilLex.messErr("Affectation impossible car identifiant inexistant");
+					UtilLex.messErr("Affectation impossible car identifiant inexistant (10)");
 				}
 			break;
 			
@@ -288,10 +312,26 @@ public class PtGen {
 						po.produire(AFFECTERG);
 						po.produire(tabSymb[adresseIdentAffectation].info);
 					} else {
-						UtilLex.messErr("Type incompatible pour l'affectation");
+						UtilLex.messErr("Type incompatible pour l'affectation de variable globale (11)");
+					}
+				} else if(tabSymb[adresseIdentAffectation].categorie == VARLOCALE) {
+					if(tabSymb[adresseIdentAffectation].type == tCour) {
+						po.produire(AFFECTERL);
+						po.produire(tabSymb[adresseIdentAffectation].info);
+						po.produire(0);
+					} else {
+						UtilLex.messErr("Type incompatible pour l'affectation de variable local (11)");
+					}
+				} else if(tabSymb[adresseIdentAffectation].categorie == PARAMMOD) {
+					if(tabSymb[adresseIdentAffectation].type == tCour) {
+						po.produire(AFFECTERL);
+						po.produire(tabSymb[adresseIdentAffectation].info);
+						po.produire(0);
+					} else {
+						UtilLex.messErr("Type incompatible pour l'affectation de paramètre mod (11)");
 					}
 				} else {
-					UtilLex.messErr("Catégorie non autorisé pour l'affectation");
+					UtilLex.messErr("Catégorie non autorisé pour l'affectation (11)");
 				}
 			break;
 			
@@ -306,10 +346,10 @@ public class PtGen {
 						tCour = BOOL;
 						po.produire(LIREBOOL);
 					} else {
-						UtilLex.messErr("Type incompatible pour une lecture");
+						UtilLex.messErr("Type incompatible pour une lecture (12)");
 					}
 				} else {
-					UtilLex.messErr("Variable non présente dans la table des symboles");
+					UtilLex.messErr("Variable non présente dans la table des symboles(12)");
 				}
 			break;
 			
@@ -319,7 +359,7 @@ public class PtGen {
 				} else if(tCour == BOOL) {
 					po.produire(ECRBOOL);
 				} else {
-					UtilLex.messErr("Type incompatible pour une écriture");
+					UtilLex.messErr("Type incompatible pour une écriture (13)");
 				}
 			break;
 			
@@ -406,11 +446,26 @@ public class PtGen {
 						
 						po.produire(CONTENUG);
 						po.produire(tabSymb[adresseIdentATraiter].info);
+					} else if(tabSymb[adresseIdentATraiter].categorie == VARLOCALE
+							||tabSymb[adresseIdentATraiter].categorie == PARAMFIXE ){
+						tCour = tabSymb[adresseIdentATraiter].type;
+						vCour = tabSymb[adresseIdentATraiter].info;
+						
+						po.produire(CONTENUL);
+						po.produire(tabSymb[adresseIdentATraiter].info);
+						po.produire(0);
+					} else if(tabSymb[adresseIdentATraiter].categorie == PARAMMOD){
+						tCour = tabSymb[adresseIdentATraiter].type;
+						vCour = tabSymb[adresseIdentATraiter].info;
+						
+						po.produire(CONTENUL);
+						po.produire(tabSymb[adresseIdentATraiter].info);
+						po.produire(1);
 					} else {
-						UtilLex.messErr("Categorie de symbole impossible à affecter");
+						UtilLex.messErr("Categorie de symbole impossible à affecter (35)");
 					}
 				} else {
-					UtilLex.messErr("Opérattion impossible: variable ou constante inexistante");
+					UtilLex.messErr("Opérattion impossible: variable ou constante inexistante (35)");
 				}
 			break;
 			
@@ -469,27 +524,27 @@ public class PtGen {
 				pileRep.empiler(0);
 			break;
 			
-			case 62:
+			case 62://Production BSIFAUX
 				po.produire(BSIFAUX);
 				po.produire(0);
 				pileRep.empiler(po.getIpo());
 			break;
 			
-			case 63:
+			case 63://Production BINCOND et résolution BSIFAUX
 				po.produire(BINCOND);
 				po.modifier(pileRep.depiler(), po.getIpo()+2);
 				po.produire(pileRep.depiler());
 				pileRep.empiler(po.getIpo());
 			break;
 			
-			case 64:
+			case 64://Si une clause AUT
 				po.produire(BINCOND);
 				po.produire(0);
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 				pileRep.empiler(po.getIpo());
 			break;
 			
-			case 65:
+			case 65://Résolution des BINCOND et du dernier BSIFAUX
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 				int tmp = pileRep.depiler();
 				int valeurBINCOND;
@@ -501,6 +556,120 @@ public class PtGen {
 				}
 				
 				po.modifier(tmp, po.getIpo()+1);
+			break;
+			
+			/*
+			 * Gestion des procédures (declaration, appel, etc.) 
+			 */
+			case 71://Pour pouvoir sauter les procédure lors de l'execution du programme
+				po.produire(BINCOND);
+				po.produire(0);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 72://Déclaration d'une procédure
+				int adresseProcedure = presentIdent(1);
+				
+				if(adresseProcedure == 0) {
+					placeIdent(UtilLex.numId, PROC, NEUTRE, po.getIpo()+1);
+					placeIdent(-1, PRIVEE, NEUTRE, 0);
+					
+					bc = it + 1;
+					nombreDeParametre = 0;
+					nombreDeVariableLocale = 0;
+				} else {
+					UtilLex.messErr("Procédure déjà déclaré (73)");
+				}
+			break;
+			
+			case 73://Déclaration des params fixes
+				int adresseParamFixe = presentIdent(bc);
+				
+				if(adresseParamFixe == 0) {
+					placeIdent(UtilLex.numId, PARAMFIXE, tCour, nombreDeParametre);
+					nombreDeParametre++;
+				} else {
+					UtilLex.messErr("Paramètre fixe déjà déclaré (74)");
+				}
+			break;
+			
+			case 74://Déclarations des params mods
+				int adresseParamMod = presentIdent(bc);
+				
+				if(adresseParamMod == 0) {
+					placeIdent(UtilLex.numId, PARAMMOD, tCour, nombreDeParametre);
+					nombreDeParametre++;
+				} else {
+					UtilLex.messErr("Paramètre mod déjà déclaré (75)");
+				}
+			break;
+			
+			case 75://Affecte le nombre de paramètres
+				tabSymb[bc-1].info = nombreDeParametre;
+			break;
+			
+			case 76://Prépare un appel de proc
+				adresseIdentAppel = presentIdent(1);
+				
+				if(adresseIdentAppel != 0) {
+					if(tabSymb[adresseIdentAppel].categorie == PROC) {
+						tCour = tabSymb[adresseIdentAppel].type;
+					} else {
+						UtilLex.messErr("Catégorie non autorisé pour un appel de procédure (76)");
+					}
+				} else {
+					UtilLex.messErr("Appel de procédure impossible car identifiant inexistant (76)");
+				}
+			break;
+			
+			case 77://Produit un appel de proc
+				if(tabSymb[adresseIdentAppel].categorie == PROC) {
+					po.produire(APPEL);
+					po.produire(tabSymb[adresseIdentAppel].info);
+					po.produire(tabSymb[adresseIdentAppel+1].info);
+				} else {
+					UtilLex.messErr("Catégorie non autorisé pour un appel de procédure (77)");
+				}
+			break;
+			
+			case 78:
+				int adresseParamModATraiter = presentIdent(1);
+				
+				if(adresseParamModATraiter != 0) {
+					if(tabSymb[adresseParamModATraiter].categorie == VARGLOBALE) {
+						po.produire(EMPILERADG);
+						po.produire(tabSymb[adresseParamModATraiter].info);
+					} else if(tabSymb[adresseParamModATraiter].categorie == VARLOCALE) {
+						po.produire(EMPILERADL);
+						po.produire(tabSymb[adresseParamModATraiter].info);
+						po.produire(0);
+					} else if(tabSymb[adresseParamModATraiter].categorie == PARAMMOD) {
+						po.produire(EMPILERADL);
+						po.produire(tabSymb[adresseParamModATraiter].info);
+						po.produire(1);
+					} else {
+						UtilLex.messErr("Catégorie non autorisé pour un passage de paramètre mod (78)");
+					}
+				} else {
+					UtilLex.messErr("Identifient inexistant dans la table des symboles (78)");
+				}
+			break;
+			
+			case 80:
+				po.produire(RETOUR);
+				po.produire(tabSymb[bc-1].info);
+				
+				it = bc + tabSymb[bc-1].info - 1;
+				
+				for (int i = 0 ; i < tabSymb[bc-1].info ; i++) {
+					tabSymb[bc+i].code = -1;
+				}
+				
+				bc = 1;
+			break;
+			
+			case 81://Résolution du saut des procédures
+				po.modifier(pileRep.depiler(), po.getIpo()+1);
 			break;
 			
 			case 255:

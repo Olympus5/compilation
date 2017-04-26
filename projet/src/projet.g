@@ -40,7 +40,7 @@ unite  :   unitprog  EOF
   
 unitprog
   : 'programme' ident ':'  
-     declarations  
+     declarations {PtGen.pt(81);}  
      corps { System.out.println("succ�s, arret de la compilation "); }
   {PtGen.pt(255);};
   
@@ -74,10 +74,10 @@ type  : 'ent' {PtGen.pt(4);}
   |     'bool' {PtGen.pt(5);} 
   ;
   
-decprocs: (decproc ptvg)+
+decprocs: {PtGen.pt(71);} (decproc ptvg)+
   ;
   
-decproc :  'proc'  ident  parfixe? parmod? consts? vars? corps 
+decproc :  'proc' ident {PtGen.pt(72);} parfixe? parmod? {PtGen.pt(75);} consts? vars? corps {PtGen.pt(80);} 
   ;
   
 ptvg  : ';'
@@ -90,13 +90,13 @@ corps : 'debut' instructions 'fin'
 parfixe: 'fixe' '(' pf ( ';' pf)* ')'
   ;
   
-pf  : type ident  ( ',' ident  )*  
+pf  : type ident {PtGen.pt(73);} ( ',' ident {PtGen.pt(73);} )*  
   ;
 
 parmod  : 'mod' '(' pm ( ';' pm)* ')'
   ;
   
-pm  : type ident  ( ',' ident  )*
+pm  : type ident {PtGen.pt(74);} ( ',' ident {PtGen.pt(74);} )*
   ;
   
 instructions
@@ -132,14 +132,14 @@ ecriture: 'ecrire' '(' expression {PtGen.pt(13);} ( ',' expression {PtGen.pt(13)
   
 affouappel
   : ident  ( {PtGen.pt(10);} ':=' expression {PtGen.pt(11);}
-            |   (effixes (effmods)?)?  
+            | {PtGen.pt(76);} (effixes (effmods)?)? {PtGen.pt(77);}  
            )
   ;
   
 effixes : '(' (expression  (',' expression  )*)? ')'
   ;
   
-effmods :'(' (ident  (',' ident  )*)? ')'
+effmods :'(' (ident {PtGen.pt(78);} (',' ident {PtGen.pt(78);} )*)? ')'
   ; 
   
 expression: (exp1) ( {PtGen.pt(37);} 'ou'  exp1  {PtGen.pt(37);}{PtGen.pt(21);})*
