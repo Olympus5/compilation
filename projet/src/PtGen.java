@@ -271,7 +271,7 @@ public class PtGen {
 				
 				if(adresseIdentAffectation != 0) {
 					if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
-						tCour = tOperation = tabSymb[adresseIdentAffectation].type;
+						tCour = tabSymb[adresseIdentAffectation].type;
 					} else {
 						UtilLex.messErr("Catégorie non autorisé pour l'affectation");
 					}
@@ -282,83 +282,79 @@ public class PtGen {
 			
 			case 11://Affectation de valeur
 				if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
-					po.produire(AFFECTERG);
-					po.produire(tabSymb[adresseIdentAffectation].info);
-				} 
+					if(tabSymb[adresseIdentAffectation].type == tCour) {
+						po.produire(AFFECTERG);
+						po.produire(tabSymb[adresseIdentAffectation].info);
+					} else {
+						UtilLex.messErr("Type incompatible pour l'affectation");
+					}
+				} else {
+					UtilLex.messErr("Catégorie non autorisé pour l'affectation");
+				}
 			break;
 			
+			case 12://Verification type entier
+				verifEnt();
+			break;
+			
+			case 13://Verification type booleen
+				verifBool();
+			break;
+			
+			//Production des opérateurs
 			case 21:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(OU);
 			break;
 			
 			case 22:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(ET);
 			break;
 			
 			case 23:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(NON);
 			break;
 			
 			case 24:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(EG);
 			break;
 			
 			case 25:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(DIFF);
 			break;
 			
 			case 26:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(SUP);
 			break;
 			
 			case 27:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(SUPEG);
 			break;
 			
 			case 28:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(INF);
 			break;
 			
 			case 29:
-				if(adresseIdentAffectation != 0) tOperation = BOOL;
 				po.produire(INFEG);
 			break;
 			
 			case 30:
-				if(adresseIdentAffectation != 0) tOperation = ENT;
 				po.produire(ADD);
 			break;
 			
 			case 31:
-				if(adresseIdentAffectation != 0) tOperation = ENT;
 				po.produire(SOUS);
 			break;
 			
 			case 32:
-				if(adresseIdentAffectation != 0) tOperation = ENT;
 				po.produire(MUL);
 			break;
 			
 			case 33:
-				if(adresseIdentAffectation != 0) tOperation = ENT;
 				po.produire(DIV);
 			break;
 			
 			case 34://Gestion des valeurs lors d'opérations
-				if(tOperation == ENT) {
-					verifEnt();
-				} else {
-					verifBool();
-				}
-				
 				po.produire(EMPILER);
 				po.produire(vCour);
 			break;
@@ -371,23 +367,11 @@ public class PtGen {
 						tCour = tabSymb[adresseIdentATraiter].type;
 						vCour = tabSymb[adresseIdentATraiter].info;
 						
-						if(tOperation == ENT) {
-							verifEnt();
-						} else {
-							verifBool();
-						}
-						
 						po.produire(EMPILER);
 						po.produire(vCour);
 					} else if(tabSymb[adresseIdentATraiter].categorie == VARGLOBALE) {
 						tCour = tabSymb[adresseIdentATraiter].type;
 						vCour = tabSymb[adresseIdentATraiter].info;
-						
-						if(tOperation == ENT) {
-							verifEnt();
-						} else {
-							verifBool();
-						}
 						
 						po.produire(CONTENUG);
 						po.produire(tabSymb[adresseIdentATraiter].info);
