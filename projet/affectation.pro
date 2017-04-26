@@ -9,4 +9,9 @@ debut
   i:= 2;
   j:= i;
   b1:= oui;
+  lire(b2);
+  ecrire(i < j);
+  
+  si oui ou nenni alors b1 := vrai fsi;
+  si oui et nenni alors b2 := vrai sinon b2 := faux fsi;
 fin

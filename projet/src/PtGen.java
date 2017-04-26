@@ -118,7 +118,6 @@ public class PtGen {
 	
 	//Variable complémentaire
 	private static int nombreDeVariableGlobale;
-	private static int tOperation;
 	private static int adresseIdentAffectation;
 	
 	// utilitaire de recherche de l'ident courant (ayant pour code UtilLex.numId) dans tabSymb
@@ -205,14 +204,17 @@ public class PtGen {
 			
 			
 			/*
-			 * Declaration et Affectation -> 1-20
-			 * Opérations -> 21-41
+			 * Declaration, Affectation, Lecture et Ecriture -> 1-20
+			 * Opérations -> 21-40
+			 * Conditionnel if..then..else.. -> 41-50
+			 * Boucle while..do..done -> 51-60
+			 * Conditionnel switch -> 61-70
 			 */
 			
 			
 			
 			/*
-			 * Declarations des variables, constantes, ... / Affectations de valeur
+			 * Declarations des variables, constantes, ... / Affectations de valeur / Lecture et Ecriture
 			 */
 			case 1://Compteurs de variables et ajout de variables dans la table des symboles
 				int adresseVariableGlobale = presentIdent(1);
@@ -267,7 +269,7 @@ public class PtGen {
 			break;
 			
 			case 10://Initialisation des variables pour gérer l'affection de valeur
-				adresseIdentAffectation = presentIdent(0);
+				adresseIdentAffectation = presentIdent(1);
 				
 				if(adresseIdentAffectation != 0) {
 					if(tabSymb[adresseIdentAffectation].categorie == VARGLOBALE) {
@@ -293,14 +295,37 @@ public class PtGen {
 				}
 			break;
 			
-			case 12://Verification type entier
-				verifEnt();
+			case 12:
+				adresseIdentAffectation = presentIdent(1);
+				
+				if(adresseIdentAffectation > 0) {
+					if(tabSymb[adresseIdentAffectation].type == ENT) {
+						tCour = ENT;
+						po.produire(LIRENT);
+					} else if(tabSymb[adresseIdentAffectation].type == BOOL) {
+						tCour = BOOL;
+						po.produire(LIREBOOL);
+					} else {
+						UtilLex.messErr("Type incompatible pour une lecture");
+					}
+				} else {
+					UtilLex.messErr("Variable non présente dans la table des symboles");
+				}
 			break;
 			
-			case 13://Verification type booleen
-				verifBool();
+			case 13:
+				if(tCour == ENT) {
+					po.produire(ECRENT);
+				} else if(tCour == BOOL) {
+					po.produire(ECRBOOL);
+				} else {
+					UtilLex.messErr("Type incompatible pour une écriture");
+				}
 			break;
 			
+			/*
+			 * Opération entière et booléenne
+			 */
 			//Production des opérateurs
 			case 21:
 				po.produire(OU);
@@ -313,28 +338,34 @@ public class PtGen {
 			case 23:
 				po.produire(NON);
 			break;
-			
+				
 			case 24:
+				tCour = BOOL;
 				po.produire(EG);
 			break;
 			
 			case 25:
+				tCour = BOOL;
 				po.produire(DIFF);
 			break;
 			
 			case 26:
+				tCour = BOOL;
 				po.produire(SUP);
 			break;
 			
 			case 27:
+				tCour = BOOL;
 				po.produire(SUPEG);
 			break;
 			
 			case 28:
+				tCour = BOOL;
 				po.produire(INF);
 			break;
 			
 			case 29:
+				tCour = BOOL;
 				po.produire(INFEG);
 			break;
 			
@@ -381,6 +412,38 @@ public class PtGen {
 				} else {
 					UtilLex.messErr("Opérattion impossible: variable ou constante inexistante");
 				}
+			break;
+			
+			case 36://Verification type entier
+				verifEnt();
+			break;
+			
+			case 37://Verification type booleen
+				verifBool();
+			break;
+			
+			/*
+			 * Condition de type if... then... [else...] endif
+			 */
+			case 41://Branchement si la condition est fausse
+				po.produire(BSIFAUX);
+				po.produire(0);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 42://Branchement avec un sinon + résolution du premier bsifaux
+				po.produire(BINCOND);
+				po.produire(0);
+				po.modifier(pileRep.depiler(), po.getIpo()+1);
+				pileRep.empiler(po.getIpo());
+			break;
+			
+			case 43://Résolution du branchement restant restant
+				po.modifier(pileRep.depiler(), po.getIpo()+1);
+			break;
+			
+			case 51:
+				
 			break;
 			
 			case 255:
