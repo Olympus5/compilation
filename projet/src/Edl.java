@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.HashMap;
 
 
 public class Edl {
@@ -22,6 +23,9 @@ public class Edl {
 	static int ipo, nMod, nbErr;
 	static String nomProg;
 
+	//Declaration d'un tableau contenant le nom des unités compilées
+	private static String[] nomUnites = new String[MAXMOD+1];
+	
 	//Déclaration de transdon, transcode
 	private static int[] transDon = new int[MAXMOD+1], transCode = new int[MAXMOD+1];
 	
@@ -36,7 +40,7 @@ public class Edl {
 	private static int estDansDico(String nomDef) {
 		int ret = -1;
 		
-		for(int i = 0; i < 60 && ret == -1; i++) {
+		for(int i = 0; i < 60 && ret == -1 && dicoDef[i] != null; i++) {
 			if(nomDef.equals(dicoDef[i].nomProc)) {
 				ret = i;
 			}
@@ -79,6 +83,8 @@ public class Edl {
 		
 		nMod = 0;
 		
+		nomUnites[nMod] = new String(s);
+		
 		//Initialisation de transDon et transCode pour programme
 		transDon[0] = 0;
 		transCode[0] = 0;
@@ -105,16 +111,18 @@ public class Edl {
 				tabDesc[nMod] = new Descripteur();
 				tabDesc[nMod].lireDesc(s);
 				
+				nomUnites[nMod] = new String(s);
+				
 				//Initialisation de transDon et transCode pour les modules
 				transDon[nMod] = tabDesc[nMod-1].getTailleGlobaux() + transDon[nMod-1];
 				transCode[nMod] = tabDesc[nMod-1].getTailleCode() + transCode[nMod-1];
-				
-				for(int i = 0; i < tabDesc[nMod].getNbDef(); i++) {
-					if(estDansDico(tabDesc[nMod].getDefNomProc(i+1)) == -1) {
-						dicoDef[i+nbDef] = tabDesc[nMod].new EltDef(tabDesc[nMod].getDefNomProc(i+1), tabDesc[nMod].getDefAdPo(i+1), tabDesc[nMod].getDefNbParam(i+1));
+				for(int i = nbDef, j = 0, c = tabDesc[nMod].getNbDef() + nbDef; i < c; i++, j++) {
+					if(estDansDico(tabDesc[nMod].getDefNomProc(j+1)) == -1) {
+						System.out.println(nbDef);
+						dicoDef[i] = tabDesc[nMod].new EltDef(tabDesc[nMod].getDefNomProc(j+1), tabDesc[nMod].getDefAdPo(j+1), tabDesc[nMod].getDefNbParam(j+1));
 						nbDef++;
 					} else {
-						erreur(NONFATALE, "definition: "+tabDesc[nMod].getDefNomProc(i+1)+" en doublon");
+						erreur(NONFATALE, "definition: "+tabDesc[nMod].getDefNomProc(j+1)+" en doublon");
 					}
 				}
 				
@@ -129,15 +137,99 @@ public class Edl {
 	static void constMap() {
 		// f2 = fichier ex�cutable .map construit
 		OutputStream f2 = Ecriture.ouvrir(nomProg + ".map");
-		if (f2 == null)
-			erreur(FATALE, "cr�ation du fichier " + nomProg
-					+ ".map impossible");
+		
+		if (f2 == null) {
+			erreur(FATALE, "cr�ation du fichier " + nomProg + ".map impossible");
+		}
+		
 		// pour construire le code concat�n� de toutes les unit�s
 		int[] po = new int[(nMod + 1) * MAXOBJ + 1];
 // 
 // ... A COMPLETER ...
 //
+		
+		for (int i = 0; i <= nMod; i++) {
+
+			// Ouvre le fichier
+			InputStream uniteCourant = Lecture.ouvrir(nomUnites[i] + ".obj");
+
+			// Si probleme lors de l'ouverture du fichier
+			if (uniteCourant == null) erreur(FATALE, "Fichier " + nomUnites[i] + ".obj illisible");
+
+
+			// ######################### Recuperation des vecteurs de translation #########################
+			// Creer un nouveau tableau associatif de transitions
+			HashMap<Integer, Integer> tabTrans = new HashMap<Integer, Integer>();
+
+			// Variables pour la lecture des transitions
+			int adresse;
+			int type_trans;
+
+			// Recupere toutes les transitions
+			for (int t = 0; t < tabDesc[i].getNbTransExt(); t++) {
+
+				// Recupere chaque couples
+				adresse = Lecture.lireInt(uniteCourant) + transCode[i];
+				type_trans = Lecture.lireIntln(uniteCourant);
+
+				// Ajoute le couple
+				tabTrans.put(adresse, type_trans);
+			}
+
+
+			// ######################### Recuperation du code mapile brut #########################
+			// Valeurs temporaire
+			int ref_ext = 1, derniere_instruction = tabDesc[i].getTailleCode();
+			Integer res_get;
+
+			// Ne prends pas la toute derniere instruction (vide)
+			if (i == nMod) derniere_instruction = tabDesc[i].getTailleCode()-1;
+
+			// Recupere et met dans po tout le code brut
+			for (int p = 1; p <= derniere_instruction; p++) {
+
+				// Recupere le code
+				po[ipo] = Lecture.lireIntln(uniteCourant);
+
+				// Si contenu dans le vecteur de translation
+				res_get = tabTrans.get(ipo);
+				if (res_get != null) {
+
+					// En fonction du type de transition
+					switch (res_get.intValue()) {
+
+						case TRANSDON:
+							po[ipo] += transDon[i];
+							break;
+
+						case TRANSCODE:
+							po[ipo] += transCode[i];
+							break;
+
+						case REFEXT:
+							po[ipo] = adFinale[i][ref_ext];
+							ref_ext++;
+							break;
+					}
+				}
+
+				// Incremente ipo
+				ipo++;
+			}  // For de la recuperation des transExt
+
+			// Ferme le fichier
+			Lecture.fermer(uniteCourant);
+
+		}  // For du parcours des unites
+
+		// Met a jour le nombre de variables globales a reserver
+		po[2] = transDon[nMod] + tabDesc[nMod].getTailleGlobaux();
+
+		// Ecrit po dans le fichier au nom du programme
+		for (int i = 1; i <= ipo; i++) Ecriture.ecrireStringln(f2, "" + po[i]);
+		
 		Ecriture.fermer(f2);
+		
 		// cr�ation du fichier en mn�monique correspondant
 		Mnemo.creerFichier(ipo, po, nomProg + ".ima");
 	}
@@ -155,6 +247,11 @@ public class Edl {
 // ... A COMPLETER ...
 //
 		
+		System.out.println(dicoDef[2]);
+		for(int i = 0; i < dicoDef.length && dicoDef[i] != null; i++) {
+			System.out.println("nom: "+dicoDef[i].nomProc+" adPo: "+dicoDef[i].adPo+" nbParam: "+dicoDef[i].nbParam);
+		}
+		System.out.println();
 		//Initialisation de adFinale
 		int adresseDico;
 		

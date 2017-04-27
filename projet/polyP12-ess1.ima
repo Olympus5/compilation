@@ -1,0 +1,38 @@
+FICHIER polyP12-ess1.ima : 
+
+   1  rýserver        7
+   3  rýserver        0
+   5  appel           2   0
+   8  lirent    
+   9  affecterg       0
+  11  contenug        0
+  13  empiler        -1
+  15  diff      
+  16  bsifaux        56
+  18  contenug        0
+  20  empiler         0
+  22  supeg     
+  23  contenug        0
+  25  empiler        20
+  27  infeg     
+  28  et        
+  29  bsifaux        51
+  31  contenug        0
+  33  empiler        10
+  35  inf       
+  36  bsifaux        46
+  38  contenug        0
+  40  appel           3   1
+  43  bincond        51
+  45  contenug        0
+  47  appel           4   1
+  50  lirent    
+  51  affecterg       0
+  53  bincond        12
+  55  appel           5   0
+  58  appel           6   0
+  61  arrýt     
+  62  bincond        88
+  64  empiler         0
+  66  affecterg       0
+  68 code instruction incorrect : 31

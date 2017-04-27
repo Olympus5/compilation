@@ -1,4 +1,4 @@
-FICHIER polyP13-m1ess1.desc :
+FICHIER polyP13-m2ess1.desc :
 
 unitý          module
 tailleCode     87
@@ -7,7 +7,7 @@ nbDef          3
 nbRef          0
 nbTransExt     21
 tabDef          
-    init1  3  0
-    ajout1  9  1
-    ecr1  65  0
+    init2  3  0
+    ajout2  9  1
+    ecr2  65  0
 tabRef          
