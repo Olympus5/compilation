@@ -122,6 +122,7 @@ public class PtGen {
 	private static int nombreDeParametre;
 	private static int nombreDeVariableLocale;
 	private static int adresseIdentAppel;
+	private static int adresseDef;
 	
 	// utilitaire de recherche de l'ident courant (ayant pour code UtilLex.numId) dans tabSymb
 	// rend en r�sultat l'indice de cet ident dans tabSymb (O si absence)
@@ -195,6 +196,7 @@ public class PtGen {
 		nombreDeParametre = 0;
 		nombreDeVariableLocale = 0;
 		adresseIdentAppel = 0;
+		adresseDef = 0;
 	} // initialisations
 
 	// code des points de g�n�ration A COMPLETER
@@ -216,6 +218,7 @@ public class PtGen {
 			 * Boucle while..do..done -> 51-60
 			 * Conditionnel switch -> 61-70
 			 * Procédure -> 71-90
+			 * Compilation séparée -> 91-110
 			 */
 			
 			
@@ -249,9 +252,17 @@ public class PtGen {
 			
 			case 2://Declaration de l'instructon pour réserver de la place en pile pour les vars
 				if(nombreDeVariableGlobale > 0) {
-					po.produire(RESERVER);
-					if(bc <= 1) po.produire(nombreDeVariableGlobale);
-					else po.produire(nombreDeVariableLocale);
+					if(bc <= 1 && desc.getUnite() != "module") {
+						po.produire(RESERVER);
+						po.produire(nombreDeVariableGlobale);
+						desc.setTailleGlobaux(nombreDeVariableGlobale);
+					}
+					else if(bc > 1){
+						po.produire(RESERVER);
+						po.produire(nombreDeVariableLocale);
+					} else {
+						desc.setTailleGlobaux(nombreDeVariableGlobale);
+					}
 				}
 			break;
 			
@@ -311,6 +322,10 @@ public class PtGen {
 					if(tabSymb[adresseIdentAffectation].type == tCour) {
 						po.produire(AFFECTERG);
 						po.produire(tabSymb[adresseIdentAffectation].info);
+						
+						if(desc.getUnite() == "module") {
+							modifVecteurTrans(TRANSDON);
+						}
 					} else {
 						UtilLex.messErr("Type incompatible pour l'affectation de variable globale (11)");
 					}
@@ -445,7 +460,11 @@ public class PtGen {
 						vCour = tabSymb[adresseIdentATraiter].info;
 						
 						po.produire(CONTENUG);
-						po.produire(tabSymb[adresseIdentATraiter].info);
+						po.produire(tabSymb[adresseIdentAffectation].info);
+						
+						if(desc.getUnite() == "module") {
+							modifVecteurTrans(TRANSDON);
+						}
 					} else if(tabSymb[adresseIdentATraiter].categorie == VARLOCALE
 							||tabSymb[adresseIdentATraiter].categorie == PARAMFIXE ){
 						tCour = tabSymb[adresseIdentATraiter].type;
@@ -484,6 +503,10 @@ public class PtGen {
 				po.produire(BSIFAUX);
 				po.produire(0);
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 42://Branchement avec un sinon + résolution du premier bsifaux
@@ -491,6 +514,10 @@ public class PtGen {
 				po.produire(0);
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 43://Résolution du branchement restant restant
@@ -508,6 +535,10 @@ public class PtGen {
 				po.produire(BSIFAUX);
 				po.produire(0);
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 53://Retour en début de boucle et correction des branchements
@@ -515,6 +546,10 @@ public class PtGen {
 				//Positionne le point de branchement du "tant que" quand il est mis à faux
 				po.modifier(pileRep.depiler(), po.getIpo()+2);
 				po.produire(pileRep.depiler()+1);
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			/*
@@ -528,6 +563,10 @@ public class PtGen {
 				po.produire(BSIFAUX);
 				po.produire(0);
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 63://Production BINCOND et résolution BSIFAUX
@@ -535,6 +574,10 @@ public class PtGen {
 				po.modifier(pileRep.depiler(), po.getIpo()+2);
 				po.produire(pileRep.depiler());
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 64://Si une clause AUT
@@ -542,6 +585,10 @@ public class PtGen {
 				po.produire(0);
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 				pileRep.empiler(po.getIpo());
+				
+				if(desc.getUnite() == "module") {
+					modifVecteurTrans(TRANSCODE);
+				}
 			break;
 			
 			case 65://Résolution des BINCOND et du dernier BSIFAUX
@@ -562,6 +609,7 @@ public class PtGen {
 			 * Gestion des procédures (declaration, appel, etc.) 
 			 */
 			case 71://Pour pouvoir sauter les procédure lors de l'execution du programme
+				System.out.println("Test");
 				po.produire(BINCOND);
 				po.produire(0);
 				pileRep.empiler(po.getIpo());
@@ -572,7 +620,15 @@ public class PtGen {
 				
 				if(adresseProcedure == 0) {
 					placeIdent(UtilLex.numId, PROC, NEUTRE, po.getIpo()+1);
-					placeIdent(-1, PRIVEE, NEUTRE, 0);
+		
+					adresseDef = desc.presentDef(UtilLex.repId(UtilLex.numId));
+					
+					if(adresseDef != 0) {
+						desc.modifDefAdPo(adresseDef, po.getIpo()+1);
+						placeIdent(-1, DEF, NEUTRE, 0);
+					} else {
+						placeIdent(-1, PRIVEE, NEUTRE, 0);
+					}
 					
 					bc = it + 1;
 					nombreDeParametre = 0;
@@ -606,13 +662,17 @@ public class PtGen {
 			
 			case 75://Affecte le nombre de paramètres
 				tabSymb[bc-1].info = nombreDeParametre;
+				
+				if(adresseDef != 0) {
+					desc.modifDefNbParam(adresseDef, nombreDeParametre);
+				}
 			break;
 			
 			case 76://Prépare un appel de proc
 				adresseIdentAppel = presentIdent(1);
 				
 				if(adresseIdentAppel != 0) {
-					if(tabSymb[adresseIdentAppel].categorie == PROC) {
+					if(tabSymb[adresseIdentAppel].categorie == PROC || tabSymb[adresseIdentAppel].categorie == REF) {
 						tCour = tabSymb[adresseIdentAppel].type;
 					} else {
 						UtilLex.messErr("Catégorie non autorisé pour un appel de procédure (76)");
@@ -623,9 +683,20 @@ public class PtGen {
 			break;
 			
 			case 77://Produit un appel de proc
-				if(tabSymb[adresseIdentAppel].categorie == PROC) {
+				if(tabSymb[adresseIdentAppel].categorie == PROC || tabSymb[adresseIdentAppel].categorie == REF) {
 					po.produire(APPEL);
 					po.produire(tabSymb[adresseIdentAppel].info);
+					
+					if(desc.getUnite() == "module") {
+						modifVecteurTrans(TRANSCODE);
+					}
+					
+					adresseDef = desc.presentDef(UtilLex.repId(tabSymb[adresseIdentAppel].code));
+					
+					if(adresseDef != 0) {
+						modifVecteurTrans(REFEXT);
+					}
+					
 					po.produire(tabSymb[adresseIdentAppel+1].info);
 				} else {
 					UtilLex.messErr("Catégorie non autorisé pour un appel de procédure (77)");
@@ -638,7 +709,11 @@ public class PtGen {
 				if(adresseParamModATraiter != 0) {
 					if(tabSymb[adresseParamModATraiter].categorie == VARGLOBALE) {
 						po.produire(EMPILERADG);
-						po.produire(tabSymb[adresseParamModATraiter].info);
+						po.produire(tabSymb[adresseIdentAffectation].info);
+						
+						if(desc.getUnite() == "module") {
+							modifVecteurTrans(TRANSDON);
+						}
 					} else if(tabSymb[adresseParamModATraiter].categorie == VARLOCALE) {
 						po.produire(EMPILERADL);
 						po.produire(tabSymb[adresseParamModATraiter].info);
@@ -672,8 +747,51 @@ public class PtGen {
 				po.modifier(pileRep.depiler(), po.getIpo()+1);
 			break;
 			
+			/*
+			 * Compilation séparée 
+			 */
+			case 91://Dans un programme
+				desc = new Descripteur();
+				nombreDeParametre = 0;
+				
+				desc.setUnite("programme");
+			break;
+			
+			case 92://Dans un module
+				desc = new Descripteur();
+				nombreDeParametre = 0;
+				
+				desc.setUnite("module");
+			break;
+			
+			case 93:
+				desc.ajoutDef(UtilLex.repId(UtilLex.numId));
+			break;
+			
+			case 94:
+				int adresseReference = presentIdent(1);
+				
+				if(adresseReference == 0) {
+					desc.ajoutRef(UtilLex.repId(UtilLex.numId));
+					desc.modifRefNbParam(desc.getNbRef(), nombreDeParametre);
+					
+					placeIdent(UtilLex.numId, REF, NEUTRE, desc.getNbRef());
+					placeIdent(-1, PRIVEE, NEUTRE, nombreDeParametre);
+					
+					nombreDeParametre = 0;
+				} else {
+					UtilLex.messErr("Procédure déjà présente dans la table des symboles (94)");
+				}
+			break;
+			
+			case 95:
+				nombreDeParametre++;
+			break;
+			
 			case 255:
-				po.produire(ARRET);
+				if(desc.getUnite() != "module") po.produire(ARRET);
+				desc.setTailleCode(po.getIpo());
+				desc.ecrireDesc(UtilLex.nomSource);
 				po.constObj();
 				po.constGen();
 				afftabSymb();

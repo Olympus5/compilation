@@ -34,34 +34,34 @@ import java.io.FileInputStream;
 catch (RecognitionException e) {reportError (e) ; throw e ; }}
 
 
-unite  :   unitprog  EOF
-      |    unitmodule  EOF
+unite  :   {PtGen.pt(91);} unitprog  EOF
+      |    {PtGen.pt(92);} unitmodule  EOF
   ;
   
 unitprog
-  : 'programme' ident ':'  
-     declarations {PtGen.pt(81);}  
+  : 'programme' ident ':'
+     declarations 
      corps { System.out.println("succ�s, arret de la compilation "); }
   {PtGen.pt(255);};
   
 unitmodule
   : 'module' ident ':' 
-     declarations   
-  ;
+     declarations
+  {PtGen.pt(255);};
   
 declarations
   : partiedef? partieref? consts? vars? decprocs? 
   ;
   
 partiedef
-  : 'def' ident  (',' ident )* ptvg
+  : 'def' ident {PtGen.pt(93);} (',' ident {PtGen.pt(93);} )* ptvg
   ;
   
-partieref: 'ref'  specif (',' specif)* ptvg
+partieref: 'ref'  specif {PtGen.pt(94);} (',' specif {PtGen.pt(94);} )* ptvg
   ;
   
-specif  : ident  ( 'fixe' '(' type  ( ',' type  )* ')' )? 
-                 ( 'mod'  '(' type  ( ',' type  )* ')' )? 
+specif  : ident  ( 'fixe' '(' type {PtGen.pt(95);} ( ',' type {PtGen.pt(95);} )* ')' )? 
+                 ( 'mod'  '(' type {PtGen.pt(95);} ( ',' type {PtGen.pt(95);} )* ')' )? 
   ;
   
 consts  : 'const' ( ident '=' valeur  ptvg {PtGen.pt(3);})+ 
@@ -74,7 +74,7 @@ type  : 'ent' {PtGen.pt(4);}
   |     'bool' {PtGen.pt(5);} 
   ;
   
-decprocs: {PtGen.pt(71);} (decproc ptvg)+
+decprocs:  {PtGen.pt(71);} (decproc ptvg)+ {PtGen.pt(81);} 
   ;
   
 decproc :  'proc' ident {PtGen.pt(72);} parfixe? parmod? {PtGen.pt(75);} consts? vars? corps {PtGen.pt(80);} 
